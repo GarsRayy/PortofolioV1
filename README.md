@@ -1,18 +1,20 @@
-# 🚀 Firdaus Zickrian Portfolio
+# Portfolio Dev
 
-Website portfolio interaktif berbasis React + Vite untuk menampilkan profile, project case study, experience, tech stack, GitHub stats, dan AI terminal chat.
+Portfolio Dev adalah website portfolio interaktif berbasis React + Vite untuk menampilkan profil, project case study, experience, tech stack, GitHub stats, dan terminal chat AI.
 
-> Jika project ini bermanfaat, jangan lupa kasih **⭐ Star** ya. Makasih banyak! 🙌
+## Gambaran Singkat
 
-## ✨ Highlight
+Alur utamanya dibuat sederhana: pengunjung masuk ke halaman utama, membaca profil, melihat project dan detailnya, mengecek experience serta tech stack, lalu bisa mencoba terminal chat untuk navigasi cepat atau membaca konteks project tertentu.
 
-- 🎬 Animasi modern dengan **GSAP + ScrollTrigger** (single animation engine).
-- 🧭 Smooth scrolling pakai **Lenis**.
-- 🗂️ Project gallery + modal detail project dengan route.
-- 🤖 Chat widget terminal style (`help`, `ls`, `cat <slug>`, dll).
-- ⚡ Lazy-loaded sections biar loading tetap ringan.
+Fitur utamanya:
 
-## 🧱 Tech Stack
+- Animasi modern dengan GSAP + ScrollTrigger.
+- Smooth scrolling dengan Lenis.
+- Project gallery dengan detail berbasis route/modal.
+- Chat widget gaya terminal dengan command lokal seperti `help`, `ls`, dan `cat <slug>`.
+- Section registry terpusat supaya navigasi dan chat tetap konsisten.
+
+## Tech Stack
 
 - React 19
 - Vite
@@ -21,83 +23,84 @@ Website portfolio interaktif berbasis React + Vite untuk menampilkan profile, pr
 - Lenis
 - React Router
 
-## ✅ Prasyarat
+## Prasyarat
 
-- Node.js **22+**
-- npm **10+**
+- Node.js 22 atau lebih baru
+- npm 10 atau lebih baru
 
-## 🛠️ Cara Pakai Dari Awal Sampai Akhir
+## Mulai Dari Nol
 
-### 1) Clone repository
+### 1. Clone repository
 
 ```bash
-git clone <url-repo-kamu>
-cd PortofolioWeb
+git clone https://github.com/zickrian/Portfolio-dev.git
+cd Portfolio-dev
 ```
 
-### 2) Install dependency
+### 2. Install dependency
 
 ```bash
 npm install
 ```
 
-### 3) Setup environment variable
+### 3. Tambahkan environment variable untuk AI chat
 
-```bash
-cp .env.example .env
-```
-
-Isi `.env` jika mau aktifkan AI chat response:
+Buat file `.env` di root project, lalu isi salah satu variabel berikut:
 
 ```env
 VITE_CEREBRAS_API_KEY=your_key_here
 ```
 
-Catatan:
-- Kalau tanpa API key, terminal command lokal tetap jalan normal ✅
-- `REACT_APP_CEREBRAS_API_KEY` masih diterima, tapi disarankan pakai `VITE_CEREBRAS_API_KEY`
+Kalau kamu masih memakai format lama, repo ini juga tetap membaca:
 
-### 4) Jalankan mode development
+```env
+REACT_APP_CEREBRAS_API_KEY=your_key_here
+```
+
+Catatan:
+
+- Kalau tidak ada API key, command lokal tetap jalan normal.
+- AI response hanya aktif kalau salah satu key di atas tersedia.
+
+### 4. Jalankan development server
 
 ```bash
 npm run dev
 ```
 
-Buka URL dari Vite (biasanya `http://localhost:5173`).
+Buka URL yang ditampilkan Vite, biasanya `http://localhost:5173`.
 
-### 5) Build production
+### 5. Build production
 
 ```bash
 npm run build
 ```
 
-Output build ada di folder `build/`.
+Hasil build akan masuk ke folder `build/`.
 
-### 6) Preview hasil build lokal
+### 6. Preview hasil build
 
 ```bash
 npm run preview
 ```
 
-### 7) Cek sebelum deploy
+### 7. Cek sebelum deploy
 
 ```bash
 npm run check
 ```
 
-Perintah ini menjalankan:
-- build production
-- audit dependency production
+Perintah ini menjalankan build production lalu audit dependency production.
 
-### 8) Deploy
+## Script Yang Tersedia
 
-Deploy isi folder `build/` ke hosting statis (Netlify, Vercel, Cloudflare Pages, dll).
+- `npm run dev` untuk menjalankan development server.
+- `npm run start` sama seperti `npm run dev`.
+- `npm run build` untuk menghasilkan production build.
+- `npm run preview` untuk preview hasil build lokal.
+- `npm run check` untuk build + audit dependency.
 
-Penting untuk routing SPA:
-- pastikan fallback route diarahkan ke `index.html`
-- ini diperlukan untuk route seperti `/projects/:slug`
-
-## 🗂️ Struktur Project
+## Struktur Project
 
 ```text
 .
@@ -113,42 +116,41 @@ Penting untuk routing SPA:
 │   ├── services/
 │   └── utils/
 ├── tailwind.config.js
-└── vite.config.js
+├── vite.config.js
+└── build/
 ```
 
-## ✍️ Cara Edit Konten Portfolio
+## Cara Kerja Konten
 
-Kalau mau ubah konten tanpa bongkar layout, fokus di file ini:
+Kalau kamu ingin mengubah isi portfolio tanpa mengutak-atik layout besar, fokus ke file berikut:
 
-- Data umum (profile, experience, dll): `src/data/portfolioData.js`
-- Data kartu project gallery: `src/data/projectMeta.js`
-- Data detail project untuk chat `cat <slug>`: `src/data/projectDetailsData.js`
-- Registry section chat: `src/data/sectionRegistry.js`
-- Halaman detail per project: `src/projectDetails/`
+- Profile, experience, tech stack, projects, achievements, dan capabilities: `src/data/portfolioData.js`
+- Metadata kartu project di gallery: `src/data/projectMeta.js`
+- Konten detail project yang dipakai chat `cat <slug>`: `src/data/projectDetailsData.js`
+- Daftar section yang bisa di-scroll lewat chat dan navbar: `src/data/sectionRegistry.js`
+- Detail route custom per project: `src/projectDetails/projectRegistry.js`
 
-### ➕ Menambah project baru
+### Menambah project baru
 
-1. Tambah metadata project di `src/data/projectMeta.js`
-2. Tambah detail project dengan `slug` yang sama di `src/data/projectDetailsData.js`
-3. (Opsional) Buat halaman detail custom di `src/projectDetails/`
-4. Register halaman custom di `src/projectDetails/projectRegistry.js`
+1. Tambahkan metadata project di `src/data/projectMeta.js`.
+2. Tambahkan data detail dengan `slug` yang sama di `src/data/projectDetailsData.js`.
+3. Jika butuh tampilan detail custom, buat komponen baru di `src/projectDetails/`.
+4. Daftarkan komponen tersebut di `src/projectDetails/projectRegistry.js`.
 
-## 🖼️ Asset Penting
+### Menambah section baru
 
-- Foto About: `public/profilee.webp`
-- Foto preload hero: `public/profile.webp`
-- Gambar OG/Twitter: `public/og-icon.png`
-- Galeri hackathon: `public/hackathon-base/`
-- File CV: `public/cv.pdf`
+1. Tambahkan section ke `src/data/sectionRegistry.js`.
+2. Pastikan komponen memiliki `elementId` yang cocok.
+3. Chat widget dan intent router akan ikut membaca section baru itu.
 
-## 💬 Chat Widget
+## Chat Widget
 
-Mode chat:
+Chat widget punya dua mode:
 
-- Command lokal: selalu aktif
-- AI response: aktif kalau `VITE_CEREBRAS_API_KEY` tersedia
+- Command lokal selalu aktif.
+- AI response aktif jika API key Cerebras tersedia.
 
-Command yang tersedia:
+Command yang didukung:
 
 - `help`
 - `ls`
@@ -156,21 +158,30 @@ Command yang tersedia:
 - `history`
 - `clear`
 
-## 🎞️ Catatan Animasi
+Kalau kamu ingin menyesuaikan perilaku AI atau konteks section, cek `src/services/cerebras.js`, `src/services/aiContext.js`, dan `src/data/sectionRegistry.js`.
 
-Project ini sudah pakai **GSAP-only** untuk animasi (termasuk wrapper internal GSAP), jadi stack animasi tetap konsisten dan lebih gampang dirawat.
+## Asset Penting
 
-## 🧯 Troubleshooting
+- Foto about: `public/profilee.webp`
+- Foto preload hero: `public/profile.webp`
+- Gambar OG/Twitter: `public/og-icon.png`
+- Galeri hackathon: `public/hackathon-base/`
+- CV: `public/cv.pdf`
 
-- AI tidak merespon: cek `.env` dan restart dev server
-- Command chat jalan tapi AI gagal: biasanya API key/limit/network
-- CV tidak sesuai: ganti `public/cv.pdf`
-- GitHub stats kosong: kemungkinan rate limit API publik
+## Deploy
 
-## 📜 License
+Deploy hasil folder `build/` ke hosting statis seperti Netlify, Vercel, atau Cloudflare Pages.
 
-Saat ini repository belum menyertakan lisensi open-source.
+Karena ini SPA, pastikan rewrite/fallback route diarahkan ke `index.html` supaya route seperti detail project tetap aman saat dibuka langsung.
 
----
+## Troubleshooting
 
-Kalau kamu suka project ini, bantu dukung dengan **⭐ Star** repo-nya ya. Bikin semangat untuk update fitur baru 😄🔥
+- AI tidak merespons: cek `.env`, pastikan API key terisi, lalu restart dev server.
+- Command chat jalan tapi AI gagal: biasanya karena key, limit, atau koneksi jaringan.
+- Build tidak muncul di folder yang diharapkan: hasilnya ada di `build/`, bukan `dist/`.
+- CV tidak sesuai: ganti file `public/cv.pdf`.
+- GitHub stats kosong: kemungkinan kena rate limit API publik.
+
+## License
+
+Repository ini belum menyertakan lisensi open-source.
