@@ -31,7 +31,7 @@ export const project = {
 };
 
 const accessNotice = (
-  <div className="mb-10 border-4 border-black bg-lime-400 p-8">
+  <div className="mb-10 border-4 border-charcoal bg-garnet p-8">
     <h2 className="text-3xl md:text-4xl font-black uppercase mb-4">Restricted Access</h2>
     <p className="text-lg font-medium leading-relaxed">
       This website is only accessible using a Udinus student email (@mhs.dinus.ac.id). The authentication system is designed

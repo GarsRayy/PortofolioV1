@@ -26,11 +26,11 @@ const MarqueeBanner = memo(function MarqueeBanner() {
                 {skills.map((skill, j) => (
                   <span key={j} className="flex items-center gap-6 md:gap-14">
                     <span
-                      className="text-lime-400 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(163,230,53,0.6)]"
+                      className="text-garnet hover:text-ivory transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(140,16,7,0.6)]"
                     >
                       {skill}
                     </span>
-                    <span className="text-lime-400/30 text-xs">✦</span>
+                    <span className="text-garnet/30 text-xs">✦</span>
                   </span>
                 ))}
               </div>
@@ -43,7 +43,7 @@ const MarqueeBanner = memo(function MarqueeBanner() {
         </div>
 
         {/* ── Row 2: Green background, scrolling right ── */}
-        <div className="py-2.5 md:py-4 bg-lime-400 overflow-hidden relative group">
+        <div className="py-2.5 md:py-4 bg-garnet overflow-hidden relative group">
           <div
             className="flex whitespace-nowrap gap-6 md:gap-12 will-change-transform group-hover:[animation-play-state:paused]"
             style={{ animation: 'marquee-scroll-right 32s linear infinite' }}
@@ -61,8 +61,8 @@ const MarqueeBanner = memo(function MarqueeBanner() {
           </div>
 
           {/* Edge Fades */}
-          <div className="absolute inset-y-0 left-0 w-12 md:w-24 bg-gradient-to-r from-lime-400 to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-12 md:w-24 bg-gradient-to-l from-lime-400 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-12 md:w-24 bg-gradient-to-r from-garnet to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-12 md:w-24 bg-gradient-to-l from-garnet to-transparent z-10 pointer-events-none" />
         </div>
 
       </div>

@@ -277,11 +277,11 @@ export default function ProjectGallery({ onOpenProject }) {
   // ── MOBILE LAYOUT ──
   if (!enablePinnedScroll) {
     return (
-      <section ref={sectionRef} className="relative bg-neutral-900 overflow-hidden py-16 pb-20">
+      <section ref={sectionRef} className="relative bg-charcoal overflow-hidden py-16 pb-20">
         {/* Section Header */}
         <div className="px-6 mb-10">
           <div className="flex items-center gap-4 mb-10">
-            <div className="w-2 h-2 bg-lime-400 rounded-full shadow-[0_0_8px_rgba(163,230,53,0.8)]" />
+            <div className="w-2 h-2 bg-garnet rounded-full shadow-[0_0_8px_rgba(140,16,7,0.8)]" />
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
               02. Past_Explorations
             </span>
@@ -290,7 +290,7 @@ export default function ProjectGallery({ onOpenProject }) {
 
           <h2 className="text-5xl font-black text-white uppercase leading-[0.92] tracking-tight">
             Past<br />
-            <span className="text-lime-400">Explorations</span>
+            <span className="text-garnet">Explorations</span>
           </h2>
           <p className="mt-4 text-neutral-400 text-sm leading-6 max-w-sm">
             Transforming ideas into real-world applications.
@@ -306,7 +306,7 @@ export default function ProjectGallery({ onOpenProject }) {
             {projects.map((_, i) => (
               <div
                 key={i}
-                className={`h-1 rounded-full transition-all duration-300 ${i === activeProjectIndex ? 'w-6 bg-lime-400' : 'w-1.5 bg-white/20'}`}
+                className={`h-1 rounded-full transition-all duration-300 ${i === activeProjectIndex ? 'w-6 bg-garnet' : 'w-1.5 bg-white/20'}`}
               />
             ))}
           </div>
@@ -315,7 +315,7 @@ export default function ProjectGallery({ onOpenProject }) {
         {/* Horizontally scrollable card strip */}
         <div
           ref={mobileScrollRef}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 scrollbar-hide [-webkit-overflow-scrolling:touch] [touch-action:pan-x] pb-4"
+          className="flex flex-col gap-8 px-6 pb-4"
         >
           {projects.map((project, index) => (
             <Gsap.div
@@ -325,7 +325,7 @@ export default function ProjectGallery({ onOpenProject }) {
               role="button"
               tabIndex={0}
               onKeyDown={(e) => { if (e.key === "Enter") onOpenProject?.(project); }}
-              className="project-card group relative w-[80vw] shrink-0 snap-center overflow-hidden rounded-lg border border-white/10 bg-neutral-950 cursor-pointer active:scale-[0.98] transition-transform"
+              className="project-card group relative w-full overflow-hidden rounded-lg border border-white/10 bg-charcoal cursor-pointer active:scale-[0.98] transition-transform"
               data-project-index={index}
               style={{ WebkitTapHighlightColor: 'transparent', aspectRatio: '3/4' }}
             >
@@ -364,7 +364,7 @@ export default function ProjectGallery({ onOpenProject }) {
               {/* Category + Title */}
               <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-lime-400 shadow-[0_0_6px_rgba(163,230,53,0.8)]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-garnet shadow-[0_0_6px_rgba(140,16,7,0.8)]" />
                   <span className="text-[10px] font-mono font-bold uppercase tracking-[0.16em] text-white/70">
                     {project.category}
                   </span>
@@ -374,7 +374,7 @@ export default function ProjectGallery({ onOpenProject }) {
                 </h3>
 
                 {/* CTA arrow */}
-                <div className="mt-3 flex items-center gap-2 text-lime-400">
+                <div className="mt-3 flex items-center gap-2 text-garnet">
                   <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-bold">View Project</span>
                   <ArrowUpRight size={14} strokeWidth={2.5} />
                 </div>
@@ -389,7 +389,7 @@ export default function ProjectGallery({ onOpenProject }) {
 
   // ── DESKTOP LAYOUT (GSAP horizontal pinned scroll) ──
   return (
-    <section ref={sectionRef} className="relative bg-neutral-900 overflow-hidden h-[100dvh]">
+    <section ref={sectionRef} className="relative bg-charcoal overflow-hidden h-[100dvh]">
 
       {/* Section Header */}
       <Gsap.div
@@ -398,7 +398,7 @@ export default function ProjectGallery({ onOpenProject }) {
         viewport={{ once: true }}
         className="absolute top-16 left-24 right-24 flex items-center gap-4 z-20 pointer-events-none"
       >
-        <div className="w-2 h-2 bg-lime-400 rounded-full shadow-[0_0_8px_rgba(163,230,53,0.8)]" />
+        <div className="w-2 h-2 bg-garnet rounded-full shadow-[0_0_8px_rgba(140,16,7,0.8)]" />
         <span className="font-mono text-xs font-bold uppercase tracking-[0.26em] text-white/40">
           02. Past_Explorations
         </span>
@@ -420,12 +420,12 @@ export default function ProjectGallery({ onOpenProject }) {
           >
             <h2 className="text-6xl lg:text-8xl font-black text-white uppercase leading-[0.92]">
               Past<br />
-              <span className="text-lime-400">Explorations</span>
+              <span className="text-garnet">Explorations</span>
             </h2>
             <p className="mt-8 text-neutral-300 max-w-md text-lg leading-7">
               Transforming ideas into real-world applications.
             </p>
-            <ArrowUpRight className="text-lime-400 w-24 h-24 mt-8" />
+            <ArrowUpRight className="text-garnet w-24 h-24 mt-8" />
           </Gsap.div>
 
           {/* Project Cards */}
@@ -439,11 +439,11 @@ export default function ProjectGallery({ onOpenProject }) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") onOpenProject?.(project);
               }}
-              className="project-card group relative h-[70vh] w-[45vw] shrink-0 overflow-hidden rounded-[4px] border border-white/10 bg-neutral-900 transition-all duration-500 hover:border-lime-400/50 hover:shadow-[0_0_40px_rgba(163,230,53,0.1)] active:scale-[0.98] cursor-pointer"
+              className="project-card group relative h-[70vh] w-[45vw] shrink-0 overflow-hidden rounded-[4px] border border-white/10 bg-charcoal transition-all duration-500 hover:border-garnet/50 hover:shadow-[0_0_40px_rgba(140,16,7,0.1)] active:scale-[0.98] cursor-pointer"
               data-project-index={index}
               style={{ WebkitTapHighlightColor: 'transparent' }}
             >
-              <div className="absolute inset-0 overflow-hidden bg-neutral-950">
+              <div className="absolute inset-0 overflow-hidden bg-charcoal">
                 <picture>
                   <source
                     srcSet={[
@@ -479,7 +479,7 @@ export default function ProjectGallery({ onOpenProject }) {
                 <div className="flex justify-between items-end gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-lime-400 shadow-[0_0_8px_rgba(163,230,53,0.8)]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-garnet shadow-[0_0_8px_rgba(140,16,7,0.8)]" />
                       <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-white/80">
                         {project.category}
                       </span>
@@ -488,7 +488,7 @@ export default function ProjectGallery({ onOpenProject }) {
                   </div>
 
                   {/* Floating Action Button */}
-                  <div className="w-14 h-14 bg-white/10 border border-white/20 text-white flex items-center justify-center rounded-full shrink-0 group-hover:bg-lime-400 group-hover:text-black group-hover:border-lime-400 transition-all duration-300 shadow-lg">
+                  <div className="w-14 h-14 bg-white/10 border border-white/20 text-white flex items-center justify-center rounded-full shrink-0 group-hover:bg-garnet group-hover:text-ivory group-hover:border-garnet transition-all duration-300 shadow-lg">
                     <ArrowUpRight size={24} strokeWidth={2} className="group-hover:rotate-45 transition-transform duration-300" />
                   </div>
                 </div>
@@ -503,7 +503,7 @@ export default function ProjectGallery({ onOpenProject }) {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <div className="flex items-start">
-                  <span className="font-mono text-sm text-lime-400 font-bold mr-1 pt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">NO.</span>
+                  <span className="font-mono text-sm text-garnet font-bold mr-1 pt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">NO.</span>
                   <span className="font-mono text-5xl font-light text-white/20 tracking-[0.18em] group-hover:text-white/40 transition-colors duration-500">
                     0{project.id}
                   </span>
@@ -523,7 +523,7 @@ export default function ProjectGallery({ onOpenProject }) {
           return (
             <div
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${isActive ? 'w-8 bg-lime-400' : 'w-2 bg-white/30'}`}
+              className={`h-2 rounded-full transition-all duration-300 ${isActive ? 'w-8 bg-garnet' : 'w-2 bg-white/30'}`}
             />
           );
         })}

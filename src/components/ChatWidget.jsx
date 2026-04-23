@@ -512,7 +512,7 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
                         {messages.map((msg, idx) => (
                             <div key={idx} className="flex flex-col gap-1 break-words group/msg">
                                 {msg.type === 'user' ? (
-                                    <div className="flex gap-2 text-lime-400">
+                                    <div className="flex gap-2 text-garnet">
                                         <span className="shrink-0 select-none">{'>'}</span>
                                         <span>{msg.text}</span>
                                     </div>
@@ -562,23 +562,23 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
 
                     {/* Quick Options */}
                     <div className="px-3 py-2 border-t border-neutral-800 bg-[#0c0c0c] flex gap-2 overflow-x-auto no-scrollbar">
-                        <button onClick={() => quickAction("Tell me about your tech stack")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-lime-400 hover:text-lime-400 transition-colors whitespace-nowrap" aria-label="Ask about tech stack">./stack</button>
-                        <button onClick={() => quickAction("Show me your projects")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-lime-400 hover:text-lime-400 transition-colors whitespace-nowrap" aria-label="Ask about projects">./projects</button>
-                        <button onClick={() => quickAction("Tell me about your experience")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-lime-400 hover:text-lime-400 transition-colors whitespace-nowrap" aria-label="Ask about experience">./experience</button>
-                        <button onClick={() => quickAction("How can I contact you?")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-lime-400 hover:text-lime-400 transition-colors whitespace-nowrap" aria-label="Ask about contact">./contact</button>
+                        <button onClick={() => quickAction("Tell me about your tech stack")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-garnet hover:text-garnet transition-colors whitespace-nowrap" aria-label="Ask about tech stack">./stack</button>
+                        <button onClick={() => quickAction("Show me your projects")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-garnet hover:text-garnet transition-colors whitespace-nowrap" aria-label="Ask about projects">./projects</button>
+                        <button onClick={() => quickAction("Tell me about your experience")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-garnet hover:text-garnet transition-colors whitespace-nowrap" aria-label="Ask about experience">./experience</button>
+                        <button onClick={() => quickAction("How can I contact you?")} className="text-[10px] text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded hover:border-garnet hover:text-garnet transition-colors whitespace-nowrap" aria-label="Ask about contact">./contact</button>
                     </div>
 
                     {/* Input Area */}
                     <form onSubmit={handleSendMessage} className="border-t border-neutral-800 bg-[#0c0c0c] p-2 flex gap-2 items-center">
-                        <span className="text-lime-400 pl-2 select-none">{'>'}</span>
+                        <span className="text-garnet pl-2 select-none">{'>'}</span>
                         <input
                             ref={inputRef}
                             type="text"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder=""
-                            className="flex-1 bg-transparent border-none outline-none text-lime-400 text-base font-mono caret-lime-400"
+                            placeholder="Type a command..."
+                            className="flex-1 bg-transparent border-none outline-none text-garnet text-base font-mono caret-garnet"
                             disabled={isTyping || isStreaming}
                             autoFocus
                             aria-label="Terminal input"

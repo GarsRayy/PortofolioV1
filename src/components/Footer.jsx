@@ -54,7 +54,7 @@ const Footer = memo(function Footer() {
   }, []);
 
   return (
-    <footer id="contact-section" className="bg-[#0A0A0A] text-white pt-20 md:pt-24 pb-12 w-full relative overflow-hidden">
+    <footer id="contact-section" className="bg-charcoal text-ivory pt-20 md:pt-24 pb-12 w-full relative overflow-hidden">
       {/* Subtle Matrix BG */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '40px 40px' }}
@@ -69,11 +69,11 @@ const Footer = memo(function Footer() {
           viewport={{ once: true }}
           className="flex items-center gap-4 mb-16 md:mb-24"
         >
-          <div className="w-2 h-2 bg-lime-400 rounded-[2px] animate-pulse" />
+          <div className="w-2 h-2 bg-garnet rounded-[2px] animate-pulse" />
           <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] md:tracking-[0.26em] text-white/40">
             {'// INITIALIZE_CONTACT'}
           </span>
-          <div className="flex-1 h-[1px] bg-white/10" />
+          <div className="flex-1 h-[1px] bg-ivory/10" />
         </Gsap.div>
 
         {/* Main Grid Layout */}
@@ -82,12 +82,12 @@ const Footer = memo(function Footer() {
           {/* Left: Huge Name & Status */}
           <div className="lg:w-1/2 flex flex-col justify-between">
             <div>
-              <h2 className="text-4xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.95] sm:leading-[0.9] text-white mb-6">
+              <h2 className="text-4xl sm:text-7xl lg:text-8xl font-clash font-black uppercase tracking-tighter leading-[0.95] sm:leading-[0.9] text-ivory mb-6">
                 LET'S <br />
-                <span className="text-lime-400 transform inline-block italic pr-4">CONNECT.</span>
+                <span className="text-garnet transform inline-block italic pr-4">CONNECT.</span>
               </h2>
-              <p className="font-sans text-sm md:text-base text-white/60 max-w-md leading-7 md:leading-8">
-                Feel free to reach out for collaborations, system architecture discussions, or just to say hello. Always open to exploring new opportunities.
+              <p className="font-jakarta text-sm md:text-base text-ivory/60 max-w-md leading-7 md:leading-8">
+                Feel free to reach out for collaborations, project discussions, or just to say hello. Always open to exploring new opportunities.
               </p>
             </div>
           </div>
@@ -101,19 +101,18 @@ const Footer = memo(function Footer() {
 
               {[
                 { label: 'About', id: 'about-section' },
-                { label: 'Projects', id: 'project-section' },
-                { label: 'Experience', id: 'experience-section' },
-                { label: 'Capabilities', id: 'capabilities-section' }
+                { label: 'Creative', id: 'playground' },
+                { label: 'Leadership', id: 'leadership-section' }
               ].map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left font-mono text-xs md:text-sm font-bold uppercase text-white/60 hover:text-lime-400 transition-colors flex items-center gap-3 group py-1"
+                  className="text-left font-mono text-xs md:text-sm font-bold uppercase text-ivory/60 hover:text-garnet transition-colors flex items-center gap-3 group py-1"
                 >
-                  <span className="w-1.5 h-1.5 bg-white/20 group-hover:bg-lime-400 transition-colors" />
+                  <span className="w-1.5 h-1.5 bg-ivory/20 group-hover:bg-garnet transition-colors" />
                   <span className="tracking-[0.14em] md:tracking-[0.2em] relative">
                     {item.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-lime-400 group-hover:w-full transition-all duration-300" />
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-garnet group-hover:w-full transition-all duration-300" />
                   </span>
                 </button>
               ))}
@@ -121,48 +120,48 @@ const Footer = memo(function Footer() {
 
             {/* Connect Links */}
             <div className="flex flex-col gap-4 min-w-[200px]">
-              <span className="font-mono text-[10px] text-white/30 uppercase tracking-[0.18em] md:tracking-[0.24em] mb-4 border-l-2 border-lime-400 pl-3">Networks</span>
+              <span className="font-mono text-[10px] text-ivory/30 uppercase tracking-[0.18em] md:tracking-[0.24em] mb-4 border-l-2 border-garnet pl-3">Networks</span>
 
               {[
-                { label: 'Email', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=firdauskhotibulzickrian@gmail.com', icon: Mail },
-                { label: 'GitHub', href: 'https://github.com/zickrian', icon: Github },
-                { label: 'LinkedIn', href: 'https://www.linkedin.com/in/firdauskhotibulzickrian/', icon: Linkedin },
+                { label: 'Email', href: 'mailto:garisrayyarabbani@gmail.com', icon: Mail },
+                { label: 'GitHub', href: 'https://github.com/GarsRayy', icon: Github },
+                { label: 'LinkedIn', href: 'https://linkedin.com/in/garisrayya', icon: Linkedin },
               ].map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center justify-between border border-white/10 bg-[#111111] hover:bg-lime-400 hover:border-lime-400 transition-colors duration-300 p-3"
+                  className="group flex items-center justify-between border border-ivory/10 bg-[#111111] hover:bg-garnet hover:border-garnet transition-colors duration-300 p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <link.icon size={16} className="text-white/40 group-hover:text-black transition-colors" />
-                    <span className="font-mono text-xs md:text-sm font-bold uppercase text-white/80 group-hover:text-black tracking-[0.14em] md:tracking-[0.2em] transition-colors">{link.label}</span>
+                    <link.icon size={16} className="text-ivory/40 group-hover:text-ivory transition-colors" />
+                    <span className="font-mono text-xs md:text-sm font-bold uppercase text-ivory/80 group-hover:text-ivory tracking-[0.14em] md:tracking-[0.2em] transition-colors">{link.label}</span>
                   </div>
-                  <ArrowUpRight size={14} className="text-white/20 group-hover:text-black transition-colors" />
+                  <ArrowUpRight size={14} className="text-ivory/20 group-hover:text-ivory transition-colors" />
                 </a>
               ))}
 
               {/* Discord Profile Link */}
               <a
-                href="https://discord.com/users/zickrian"
+                href="https://discord.com/users/garsrayy"
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between border border-white/10 bg-[#111111] hover:bg-lime-400 hover:border-lime-400 transition-colors duration-300 p-3 mt-1"
+                className="group flex items-center justify-between border border-ivory/10 bg-[#111111] hover:bg-garnet hover:border-garnet transition-colors duration-300 p-3 mt-1"
                 title="Open Discord profile"
               >
                 <div className="flex items-center gap-3">
-                  <DiscordIcon className="text-white/40 group-hover:text-black transition-colors" size={16} />
+                  <DiscordIcon className="text-ivory/40 group-hover:text-ivory transition-colors" size={16} />
                   <div className="flex flex-col items-start gap-1">
-                    <span className="font-mono text-xs md:text-sm font-bold uppercase tracking-[0.14em] md:tracking-[0.2em] leading-none transition-colors text-white/80 group-hover:text-black">
+                    <span className="font-mono text-xs md:text-sm font-bold uppercase tracking-[0.14em] md:tracking-[0.2em] leading-none transition-colors text-ivory/80 group-hover:text-ivory">
                       Discord
                     </span>
-                    <span className="font-mono text-[9px] lowercase leading-none transition-colors text-white/40 group-hover:text-black/60">
-                      @zickrian
+                    <span className="font-mono text-[9px] lowercase leading-none transition-colors text-ivory/40 group-hover:text-ivory/60">
+                      @garsrayy
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight size={14} className="text-white/20 group-hover:text-black transition-colors" />
+                <ArrowUpRight size={14} className="text-ivory/20 group-hover:text-ivory transition-colors" />
               </a>
             </div>
 
@@ -171,9 +170,9 @@ const Footer = memo(function Footer() {
 
         {/* Footer Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-4">
-          <div className="flex items-center gap-3 font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.14em] md:tracking-[0.2em]">
+          <div className="flex items-center gap-3 font-mono text-[10px] md:text-xs text-ivory/40 uppercase tracking-[0.14em] md:tracking-[0.2em]">
             <span>SYS.STATUS:</span>
-            <div className="flex items-center gap-2 text-lime-400 bg-lime-400/10 px-2 flex-grow-0 min-w-16 justify-center py-0.5 border border-lime-400/20 yg">
+            <div className="flex items-center gap-2 text-garnet bg-garnet/10 px-2 flex-grow-0 min-w-16 justify-center py-0.5 border border-garnet/20 yg">
               ONLINE
             </div>
           </div>
@@ -182,8 +181,8 @@ const Footer = memo(function Footer() {
             00:00:00 LOCAL
           </div>
 
-          <div className="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.14em] md:tracking-[0.2em] text-center md:text-right">
-            &copy; {new Date().getFullYear()} ZICKRIAN. ALL RIGHTS RESERVED.
+          <div className="font-mono text-[10px] md:text-xs text-ivory/40 uppercase tracking-[0.14em] md:tracking-[0.2em] text-center md:text-right">
+            &copy; {new Date().getFullYear()} GARIS RAYYA. ALL RIGHTS RESERVED.
           </div>
         </div>
 

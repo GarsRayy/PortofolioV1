@@ -193,7 +193,7 @@ export default function HackathonDetailModal({ isOpen, onClose }) {
                             <div className="px-6 md:px-10 py-4 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <span className="font-mono text-[10px] uppercase font-bold tracking-[0.12em] md:tracking-[0.16em] text-[#000] flex items-center gap-2">
-                                        <Trophy size={14} className="text-lime-500" />
+                                        <Trophy size={14} className="text-garnet" />
                                         National Finalist
                                     </span>
                                 </div>
@@ -228,7 +228,7 @@ export default function HackathonDetailModal({ isOpen, onClose }) {
                                 {/* Action links */}
                                 <div className="mt-10 flex flex-wrap justify-center gap-4">
                                     <a href={links.live} target="_blank" rel="noreferrer"
-                                        className="bg-lime-400 text-black px-8 py-3.5 font-bold uppercase text-xs tracking-wider hover:bg-black hover:text-white transition-all duration-300 rounded-[2px] flex items-center gap-2">
+                                        className="bg-garnet text-ivory px-8 py-3.5 font-bold uppercase text-xs tracking-wider hover:bg-charcoal hover:text-ivory transition-all duration-300 rounded-[2px] flex items-center gap-2">
                                         <Globe size={16} /> Play Live
                                     </a>
                                     <a href={links.github} target="_blank" rel="noreferrer"
@@ -271,7 +271,7 @@ export default function HackathonDetailModal({ isOpen, onClose }) {
                                                 'QRIS onboarding for non-crypto users - scan, play, and learn crypto naturally.'
                                             ].map((item, i) => (
                                                 <li key={i} className="flex gap-4">
-                                                    <span className="mt-1.5 shrink-0 block w-1.5 h-1.5 bg-lime-500 rounded-full" />
+                                                    <span className="mt-1.5 shrink-0 block w-1.5 h-1.5 bg-garnet rounded-full" />
                                                     <span className="text-sm leading-relaxed text-black/80">{item}</span>
                                                 </li>
                                             ))}
@@ -289,7 +289,7 @@ export default function HackathonDetailModal({ isOpen, onClose }) {
                                             const Icon = h.icon;
                                             return (
                                                 <div key={i} className="group flex flex-col">
-                                                    <div className="w-10 h-10 bg-black/5 rounded-full flex items-center justify-center mb-4 group-hover:bg-lime-400 group-hover:text-black transition-colors duration-300">
+                                                    <div className="w-10 h-10 bg-black/5 rounded-full flex items-center justify-center mb-4 group-hover:bg-garnet group-hover:text-ivory transition-colors duration-300">
                                                         <Icon size={18} strokeWidth={2} className="text-black/60 group-hover:text-black transition-colors" />
                                                     </div>
                                                     <span className="font-bold text-sm mb-1">{h.label}</span>

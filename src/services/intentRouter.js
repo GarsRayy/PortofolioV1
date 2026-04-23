@@ -52,7 +52,7 @@ const OFF_TOPIC_PATTERNS = [
 // even if it also matches an off-topic pattern.
 // (e.g., "apa itu LeadsUp" should NOT be blocked)
 const ON_TOPIC_OVERRIDES = [
-  /zickrian/i,
+  /garis|rayya/i,
   /portofolio|portfolio/i,
   /project|projek|proyek/i,
   ...PROJECT_META.flatMap(p => [

@@ -6,14 +6,13 @@ import { exponentialEaseOut } from '../utils/easing';
 
 const NAV_ITEMS = [
   { label: 'About', sectionId: 'about-section' },
-  { label: 'Logs', sectionId: 'project-section' },
-  { label: 'Work', sectionId: 'experience-section' },
-  { label: 'Stack', sectionId: 'tech-stack-section' },
-  { label: 'Stats', sectionId: 'github-stats-section' },
-  { label: 'Skills', sectionId: 'capabilities-section' },
+  { label: 'Experience', sectionId: 'experience-section' },
+  { label: 'Work', sectionId: 'project-section' },
+  { label: 'Creative', sectionId: 'playground' },
+  { label: 'Leadership', sectionId: 'leadership-section' },
 ];
 
-const DARK_SECTION_IDS = ['project-section', 'tech-stack-section', 'github-stats-section', 'contact-section'];
+const DARK_SECTION_IDS = ['project-section'];
 
 const Navbar = memo(function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -121,8 +120,8 @@ const Navbar = memo(function Navbar() {
           className={`group pointer-events-auto flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-md border transition-all duration-500 cursor-pointer ${isOnDarkSection ? 'bg-black/25 border-white/25 shadow-[0_8px_24px_rgba(0,0,0,0.22)]' : scrolled ? 'bg-white/80 border-black/5 shadow-[0_8px_32px_rgba(0,0,0,0.04)]' : 'bg-transparent border-transparent'}`}
         >
 
-          <span className={`text-sm font-black tracking-[0.16em] md:tracking-[0.2em] uppercase transition-colors duration-300 ${isOnDarkSection ? 'text-white' : 'text-black'}`}>
-            Zickrian
+          <span className={`text-sm font-clash font-bold tracking-[0.16em] md:tracking-[0.2em] uppercase transition-colors duration-300 ${isOnDarkSection ? 'text-ivory' : 'text-charcoal'}`}>
+            Garis Rayya
           </span>
         </div>
       </Magnetic>
@@ -132,7 +131,7 @@ const Navbar = memo(function Navbar() {
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className={`w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-md border transition-all duration-300 ${isMenuOpen ? 'bg-white/85 border-black/10 text-black shadow-[0_8px_24px_rgba(0,0,0,0.08)]' : isOnDarkSection ? 'bg-black/25 border-white/25 text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)]' : scrolled ? 'bg-white/85 border-black/10 text-black shadow-[0_8px_24px_rgba(0,0,0,0.08)]' : 'bg-[#FAF9F6]/70 border-black/10 text-black'}`}
+          className={`w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-md border transition-all duration-300 ${isMenuOpen ? 'bg-ivory border-charcoal/10 text-charcoal shadow-[0_8px_24px_rgba(0,0,0,0.08)]' : isOnDarkSection ? 'bg-charcoal/25 border-white/25 text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)]' : scrolled ? 'bg-ivory border-charcoal/10 text-charcoal shadow-[0_8px_24px_rgba(0,0,0,0.08)]' : 'bg-ivory/70 border-charcoal/10 text-charcoal'}`}
         >
           {isMenuOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
         </button>
@@ -149,7 +148,7 @@ const Navbar = memo(function Navbar() {
             className={`fixed inset-0 z-40 pointer-events-auto lg:hidden backdrop-blur-md overflow-hidden ${isOnDarkSection ? 'bg-black/72' : 'bg-[#F5F4EF]/96'}`}
           >
             <div className={`absolute inset-0 opacity-[0.1] pointer-events-none [background-size:28px_28px] ${isOnDarkSection ? '[background-image:linear-gradient(to_right,rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.24)_1px,transparent_1px)]' : '[background-image:linear-gradient(to_right,rgba(0,0,0,0.16)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.16)_1px,transparent_1px)]'}`} />
-            <div className="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-lime-400/15 blur-3xl pointer-events-none" />
+            <div className="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-garnet/15 blur-3xl pointer-events-none" />
             <div className={`absolute -bottom-24 -left-10 w-64 h-64 rounded-full blur-3xl pointer-events-none ${isOnDarkSection ? 'bg-white/12' : 'bg-white/40'}`} />
             <div className={`absolute inset-0 pointer-events-none ${isOnDarkSection ? 'bg-[radial-gradient(circle_at_15%_5%,rgba(255,255,255,0.14),rgba(0,0,0,0)_48%)]' : 'bg-[radial-gradient(circle_at_15%_5%,rgba(255,255,255,0.7),rgba(245,244,239,0)_48%)]'}`} />
 
@@ -163,7 +162,7 @@ const Navbar = memo(function Navbar() {
               <div className={`w-full max-w-md mx-auto pb-4 border-b flex items-center justify-between ${isOnDarkSection ? 'border-white/20' : 'border-black/15'}`}>
                 <span className={`font-mono text-[10px] uppercase tracking-[0.22em] ${isOnDarkSection ? 'text-white/65' : 'text-black/45'}`}>Navigation Matrix</span>
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-lime-400" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-garnet" />
                   <span className={`font-mono text-[10px] tracking-[0.14em] ${isOnDarkSection ? 'text-white/55' : 'text-black/35'}`}>MOBILE</span>
                 </div>
               </div>
@@ -193,8 +192,8 @@ const Navbar = memo(function Navbar() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.28 }}
-                onClick={() => scrollTo('contact-section')}
-                className={`w-full max-w-md mx-auto mt-6 h-12 rounded-full text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-2 shadow-[0_10px_24px_rgba(0,0,0,0.16)] ${isOnDarkSection ? 'bg-white text-black' : 'bg-black text-white'}`}
+                onClick={() => scrollTo('experience-section')}
+                className={`w-full max-w-md mx-auto mt-6 h-12 rounded-full text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-2 shadow-[0_10px_24px_rgba(0,0,0,0.16)] ${isOnDarkSection ? 'bg-ivory text-charcoal' : 'bg-charcoal text-ivory'}`}
               >
                 Let's Talk
                 <ArrowUpRight size={14} />
@@ -238,14 +237,14 @@ const Navbar = memo(function Navbar() {
       <div className="hidden lg:flex pointer-events-auto">
         <Magnetic>
           <button
-            onClick={() => scrollTo('contact-section')}
-            className={`group relative overflow-hidden flex items-center gap-3 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.12em] md:tracking-[0.16em] hover:shadow-[0_0_30px_rgba(163,230,53,0.3)] transition-all duration-500 ${isOnDarkSection ? 'bg-white text-black' : 'bg-black text-white'}`}
+            onClick={() => scrollTo('experience-section')}
+            className={`group relative overflow-hidden flex items-center gap-3 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.12em] md:tracking-[0.16em] hover:shadow-[0_0_30px_rgba(140,16,7,0.3)] transition-all duration-500 ${isOnDarkSection ? 'bg-ivory text-charcoal' : 'bg-charcoal text-ivory'}`}
           >
             {/* Core Label */}
             <span className="relative z-10 pl-2">Let's Talk</span>
 
             {/* Glowing Icon Container */}
-            <div className="relative z-10 w-7 h-7 bg-lime-400 rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform duration-300">
+            <div className="relative z-10 w-7 h-7 bg-garnet rounded-full flex items-center justify-center text-ivory group-hover:scale-110 transition-transform duration-300">
               <ArrowUpRight size={14} strokeWidth={2.5} className="group-hover:rotate-45 transition-transform duration-300" />
             </div>
           </button>

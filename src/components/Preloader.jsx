@@ -57,7 +57,7 @@ const Preloader = ({ onComplete }) => {
 
     return (
         <div
-            className={`fixed inset-0 z-[9999] bg-black text-lime-400 flex flex-col justify-between p-4 md:p-10 font-mono overflow-hidden transition-transform duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${isExiting ? '-translate-y-full' : 'translate-y-0'}`}
+            className={`fixed inset-0 z-[9999] bg-charcoal text-garnet flex flex-col justify-between p-4 md:p-10 font-mono overflow-hidden transition-transform duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${isExiting ? '-translate-y-full' : 'translate-y-0'}`}
             style={{
                 willChange: 'transform',
                 backfaceVisibility: 'hidden',
@@ -66,24 +66,24 @@ const Preloader = ({ onComplete }) => {
         >
             {/* Top Bar */}
             <div className="flex justify-between items-start uppercase text-xs md:text-sm tracking-widest opacity-50">
-                <span>Zickrian Portfolio</span>
+                <span>Garis Rayya Portfolio</span>
                 <span>©2026</span>
             </div>
 
             {/* Center Content */}
             <div className="flex flex-col items-center justify-center gap-6 w-full">
-                <Gsap.p
+                <Gsap.div
                     key={index}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="text-xl md:text-3xl font-bold tracking-widest uppercase text-lime-400"
+                    className="text-xl md:text-3xl font-clash font-bold tracking-widest uppercase text-garnet"
                 >
-                    &gt; {words[index]}_
-                </Gsap.p>
+                    GARIS RAYYA
+                </Gsap.div>
 
                 {/* ASCII Art Container */}
-                <div className="text-lime-400 font-mono text-[10px] sm:text-xs md:text-sm leading-[1.1] md:leading-none whitespace-pre text-center md:text-left select-none overflow-hidden drop-shadow-[0_0_8px_rgba(163,230,53,0.5)]">
+                <div className="text-garnet font-mono text-[10px] sm:text-xs md:text-sm leading-[1.1] md:leading-none whitespace-pre text-center md:text-left select-none overflow-hidden drop-shadow-[0_0_8px_rgba(140,16,7,0.5)]">
                     {(() => {
                         const width = typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40;
                         const filled = Math.floor((progress / 100) * width);
@@ -128,6 +128,8 @@ const Preloader = ({ onComplete }) => {
             </div>
 
             {/* Background Grid */}
+            <div className="absolute inset-y-0 left-0 w-12 md:w-24 bg-gradient-to-r from-garnet to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-12 md:w-24 bg-gradient-to-l from-garnet to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-0 z-[-1] opacity-20 pointer-events-none"
                 style={{
                     backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)',

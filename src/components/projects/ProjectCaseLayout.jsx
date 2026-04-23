@@ -28,7 +28,7 @@ export default function ProjectCaseLayout({
   mode,
 }) {
   return (
-    <div className={`bg-[#FAF9F6] text-black font-sans selection:bg-lime-400 selection:text-black overflow-x-hidden ${mode === 'page' ? 'min-h-screen' : 'h-full flex flex-col'}`}>
+    <div className={`bg-ivory text-charcoal font-jakarta selection:bg-garnet selection:text-ivory overflow-x-hidden ${mode === 'page' ? 'min-h-screen' : 'h-full flex flex-col'}`}>
 
       {/* ── Sticky header ─────────────────────── */}
       <div className="sticky top-0 z-40 bg-[#FAF9F6]/90 backdrop-blur-md border-b border-black/5">
@@ -88,7 +88,7 @@ export default function ProjectCaseLayout({
           >
             {project.links?.live && (
               <a href={project.links.live} target="_blank" rel="noreferrer"
-                className="bg-lime-400 text-black px-8 py-3.5 font-bold uppercase text-xs tracking-wider hover:bg-black hover:text-white transition-all duration-300 rounded-[2px] flex items-center gap-2 shadow-sm">
+                className="bg-garnet text-ivory px-8 py-3.5 font-bold uppercase text-xs tracking-wider hover:bg-charcoal hover:text-ivory transition-all duration-300 rounded-[2px] flex items-center gap-2 shadow-sm">
                 <Globe size={16} /> View Live
               </a>
             )}
@@ -147,7 +147,7 @@ export default function ProjectCaseLayout({
                   <ul className="space-y-4 text-base leading-relaxed text-black/80">
                     {project.features.map((feature, idx) => (
                       <li key={idx} className="flex gap-4">
-                        <span className="mt-1.5 shrink-0 block w-1.5 h-1.5 bg-lime-500 rounded-full" />
+                        <span className="mt-1.5 shrink-0 block w-1.5 h-1.5 bg-garnet rounded-full" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -166,7 +166,7 @@ export default function ProjectCaseLayout({
                   <ul className="space-y-4 text-base leading-relaxed text-black/80">
                     {project.impact.map((impact, idx) => (
                       <li key={idx} className="flex gap-4">
-                        <span className="mt-1.5 shrink-0 block w-1.5 h-1.5 bg-lime-500 rounded-full" />
+                        <span className="mt-1.5 shrink-0 block w-1.5 h-1.5 bg-garnet rounded-full" />
                         <span>{impact}</span>
                       </li>
                     ))}

@@ -5,61 +5,51 @@ import { Plus, Calendar, Building2, Sparkles, ArrowUpRight } from 'lucide-react'
 
 const experiences = [
   {
-    company: 'GDSC Udinus',
-    role: 'Developer Community',
-    period: 'Nov 2023 - Nov 2025',
-    impact: 'Contributed to 5+ technical discussions across 4 collaborative projects.',
-    stack: ['Community', 'Workshops', 'Collaboration'],
+    company: 'Laboratorium Informatika ITERA',
+    role: 'Asisten Praktikum - Basis Data',
+    period: '2024 - Present',
+    impact: 'Membimbing mahasiswa dalam perancangan database yang efisien dan aman.',
+    stack: ['SQL', 'ERD', 'Database Security', 'MySQL'],
     description: [
-      'Actively participated in workshops, technical events, and collaborative learning sessions.',
-      'Contributed insights around development and analytics in community-driven projects.',
+      'Menjelaskan perancangan ERD (Entity Relationship Diagram) untuk pemodelan data kompleks.',
+      'Mengajarkan implementasi SQL (DDL & DML) untuk manipulasi dan definisi data.',
+      'Memberikan edukasi mengenai keamanan basis data, termasuk pencegahan SQL Injection.',
     ],
   },
   {
-    company: 'Blockvizo',
-    role: 'Data Analyst',
-    period: 'Jun 2024 - Jul 2025',
-    impact: 'Improved forecasting accuracy by 35% and cut analysis time by 40%.',
-    stack: ['Data Analysis', 'Dashboards', 'Web3 Analytics', 'Predictive Modeling'],
+    company: 'Laboratorium Informatika ITERA',
+    role: 'Asisten Praktikum - PBO (Java)',
+    period: '2024 - Present',
+    impact: 'Menanamkan prinsip pemrograman berorientasi objek yang fundamental.',
+    stack: ['Java', 'OOP', 'Abstraksi', 'Polimorfisme'],
     description: [
-      'Processed 50,000+ game hash history records to model item-drop probability behavior.',
-      'Built actionable dashboards for decentralized projects, enabling faster and more confident decisions.',
-      'Specialized in predictive airdrop and winning probability analysis across 10+ Web3 ecosystems.',
+      'Mengajarkan implementasi prinsip OOP: Abstraksi, Enkapsulasi, Pewarisan, dan Polimorfisme.',
+      'Membimbing mahasiswa dalam membangun aplikasi modular menggunakan Java.',
+      'Mengevaluasi pemahaman logika pemrograman melalui tugas-tugas praktikum.',
     ],
   },
   {
-    company: 'ASAH (led by Dicoding x Accenture)',
-    role: 'Machine Learning Cohort',
-    period: 'Aug 2025 - Jan 2026',
-    impact: 'Served as project manager during the capstone phase and improved team execution by 70%.',
-    stack: ['Project Leadership', 'ML Product', 'React', 'Stakeholder Sync'],
+    company: 'Laboratorium Informatika ITERA',
+    role: 'Asisten Praktikum - Struktur Data (C++)',
+    period: '2023 - 2024',
+    impact: 'Membantu mahasiswa memahami manajemen memori dan struktur data kompleks.',
+    stack: ['C++', 'Pointers', 'Memory Management', 'Trees & Graphs'],
     description: [
-      'Acted as project manager during capstone, leading a cross-functional team of 5 machine learning engineers and React developers.',
-      'Managed the development of a banking sales prediction portal to prioritize high-probability leads and reduce low-value outreach.',
-      'Coordinated timelines and technical workflows across functions to improve delivery speed and reliability.',
+      'Menjelaskan konsep manajemen memori dan penggunaan Pointer di C++.',
+      'Membimbing implementasi struktur data linear dan non-linear (Trees, Graphs).',
+      'Mengoptimalkan algoritma pencarian dan pengurutan data.',
     ],
   },
   {
-    company: 'Programming Lab',
-    role: 'Lab Assistant',
-    period: 'Aug 2025 - Present',
-    impact: 'Mentored 110+ junior students through practical engineering sessions.',
-    stack: ['Teaching', 'Mentorship', 'Software Fundamentals'],
+    company: 'Laboratorium Informatika ITERA',
+    role: 'Asisten Praktikum - DTD & PKS',
+    period: '2023 - 2024',
+    impact: 'Digitalisasi proses administrasi dan otomasi menggunakan Google Workspace.',
+    stack: ['Google AppScript', 'Automation', 'Programming Logic'],
     description: [
-      'Assisted in 3+ weekly academic lab sessions for programming and software engineering courses.',
-      'Mentored around 110 junior students in problem solving, practical exercises, and core programming concepts.',
-    ],
-  },
-  {
-    company: 'PIJAK (led by Dicoding x IBM)',
-    role: 'AI Engineer Cohort',
-    period: 'Jan 2026 - Present',
-    impact: 'Selected participant in the PIJAK AI Engineer cohort.',
-    stack: ['Python', 'Generative AI', 'Deep Learning', 'AI Ethics'],
-    description: [
-      'Joined an intensive AI Engineer cohort focused on Generative AI, Deep Learning, and AI Ethics.',
-      'Developing advanced AI solutions with Python and industry-standard practices from the IBM SkillsBuild curriculum.',
-      'Building capstone-ready systems for real-world AI implementation challenges.',
+      'Mengajarkan otomasi digital menggunakan Google AppScript untuk efisiensi kerja.',
+      'Menanamkan logika pemrograman dasar melalui kurikulum PKS (Pengantar Komputer dan Software).',
+      'Membimbing mahasiswa dalam pembuatan aplikasi spreadsheet sederhana namun fungsional.',
     ],
   },
 ];
@@ -77,7 +67,7 @@ const ExperienceItem = ({ experience, isExpanded, onToggle, index }) => {
       <div className="absolute left-[15px] top-0 h-full w-px bg-black/[0.08]" />
 
       <div className="relative pl-8 min-w-0">
-        <span className={`absolute left-[10px] top-8 h-[11px] w-[11px] rounded-full border ${isExpanded ? 'border-lime-500 bg-lime-500' : 'border-black/25 bg-[#FAF9F6]'}`} />
+        <span className={`absolute left-[10px] top-8 h-[11px] w-[11px] rounded-full border ${isExpanded ? 'border-garnet bg-garnet' : 'border-charcoal/25 bg-ivory'}`} />
 
         <button
           onClick={onToggle}
@@ -92,13 +82,13 @@ const ExperienceItem = ({ experience, isExpanded, onToggle, index }) => {
                   {experience.period}
                 </span>
                 {isCurrent && (
-                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] bg-lime-400 text-black px-2.5 py-1 rounded-[2px]">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] bg-garnet text-ivory px-2.5 py-1 rounded-[2px]">
                     Active Now
                   </span>
                 )}
               </div>
 
-              <h3 className="text-[24px] md:text-[30px] lg:text-[34px] font-black uppercase tracking-[-0.02em] leading-[0.95] text-black">
+              <h3 className="text-[24px] md:text-[30px] lg:text-[34px] font-clash font-bold uppercase tracking-[-0.02em] leading-[0.95] text-charcoal">
                 {experience.role}
               </h3>
 
@@ -134,7 +124,7 @@ const ExperienceItem = ({ experience, isExpanded, onToggle, index }) => {
               }}
               className="overflow-hidden"
             >
-              <div className="mt-2 ml-0 rounded-[6px] border border-black/[0.08] bg-[#F7F7F3] px-5 md:px-7 py-5 md:py-6">
+              <div className="mt-2 ml-0 rounded-[6px] border border-charcoal/[0.08] bg-ivory/50 px-5 md:px-7 py-5 md:py-6">
                 <ul className="space-y-3 max-w-3xl">
                   {experience.description.map((point) => (
                     <li key={point} className="flex items-start gap-2.5 text-black/60 font-light text-sm md:text-[15px] leading-relaxed">
@@ -182,14 +172,14 @@ const ProfessionalExperience = () => {
   }, []);
 
   return (
-    <section id="experience-section" className="pt-20 md:pt-24 pb-24 md:pb-32 w-full relative bg-[#FAF9F6] overflow-hidden overflow-x-clip">
+    <section id="experience-section" className="pt-20 md:pt-24 pb-24 md:pb-32 w-full relative bg-ivory overflow-hidden overflow-x-clip">
       <div className="absolute inset-0 pointer-events-none select-none">
         <div className="absolute right-0 top-20 w-[460px] h-[460px] bg-black/[0.025] rounded-full blur-[100px]" />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <div className="flex items-center gap-3 mb-14 md:mb-16">
-          <span className="w-[6px] h-[6px] rounded-full bg-lime-500 shrink-0" />
+          <span className="w-[6px] h-[6px] rounded-full bg-garnet shrink-0" />
           <span className="font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.24em] text-black/32">
             03 - Experience
           </span>
@@ -198,7 +188,7 @@ const ProfessionalExperience = () => {
 
         <div className="grid lg:grid-cols-[360px_1fr] gap-10 lg:gap-14 items-start min-w-0">
           <aside className="lg:sticky lg:top-24 min-w-0">
-            <h2 className="text-[34px] sm:text-[46px] lg:text-[56px] font-black uppercase tracking-[-0.03em] leading-[0.95] text-black">
+            <h2 className="text-[34px] sm:text-[46px] lg:text-[56px] font-clash font-bold uppercase tracking-[-0.03em] leading-[0.95] text-charcoal">
               Professional
               <br />
               Experience
