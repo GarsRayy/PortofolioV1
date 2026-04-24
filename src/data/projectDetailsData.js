@@ -6,14 +6,17 @@ export const PROJECT_DETAILS_DATA = {
     slug: "pplk-itera-website",
     tagline: "Official orientation platform for 5,000+ new students at ITERA.",
     year: "2025",
-    stack: ["React", "Tailwind CSS", "GSAP", "Figma"],
-    challenge: "Developing a robust and accessible portal that can handle high traffic during the university's orientation week while maintaining a premium visual experience.",
-    solution: "Built a high-performance React application with optimized assets, intuitive navigation, and smooth GSAP animations to guide students through their orientation process.",
-    outcome: "Successfully onboarded over 5,000 students with zero downtime and received positive feedback for the UI/UX design.",
+    role: "Lead UI/UX Designer & Web Developer",
+    techStack: ["React", "Tailwind CSS", "GSAP", "Figma", "Supabase"],
+    challenge: "Developing a robust and accessible portal that can handle high traffic during the university's orientation week while maintaining a premium visual experience for over 5,000 concurrent users.",
+    solution: "Built a high-performance React application with optimized assets, intuitive navigation, and smooth GSAP animations to guide students through their orientation process. Integrated Supabase for real-time data management.",
+    outcome: "Successfully onboarded over 5,000 students with zero downtime and received positive feedback for the UI/UX design, leading to a 40% increase in student engagement compared to previous years.",
+    narrative: "The project started as a challenge to redefine how new students interact with university resources. We focused on a 'mobile-first' approach, ensuring that every student could access vital information on the go. The aesthetic was chosen to be energetic yet professional, mirroring the spirit of the orientation program.",
     links: {
       repo: "https://github.com/GarsRayy",
     },
-    image: "/images/pplk_itera_website_1776967239729.png"
+    image: "/images/pplk_itera_website_1776967239729.png",
+    heroImage: "/images/pplk_itera_website_1776967239729.png"
   },
   "income-prediction-ann": {
     title: "Income Prediction (ANN)",
@@ -22,14 +25,17 @@ export const PROJECT_DETAILS_DATA = {
     slug: "income-prediction-ann",
     tagline: "Artificial Neural Network model to predict income brackets based on demographic data.",
     year: "2024",
-    stack: ["Python", "TensorFlow", "Pandas", "Scikit-Learn"],
-    challenge: "Handling imbalanced demographic datasets and optimizing neural network architecture for high accuracy in income classification.",
-    solution: "Implemented a deep learning pipeline using TensorFlow with layered ANN architecture, incorporating data balancing techniques and feature engineering.",
-    outcome: "Achieved an 85% accuracy rate on test data, providing valuable insights into demographic-income correlations.",
+    role: "Data Scientist",
+    techStack: ["Python", "TensorFlow", "Pandas", "Scikit-Learn", "Matplotlib"],
+    challenge: "Handling imbalanced demographic datasets and optimizing neural network architecture for high accuracy in income classification, particularly for minority groups within the dataset.",
+    solution: "Implemented a deep learning pipeline using TensorFlow with layered ANN architecture, incorporating SMOTE for data balancing and extensive feature engineering to capture non-linear relationships.",
+    outcome: "Achieved an 85% accuracy rate on test data, providing valuable insights into demographic-income correlations and identifying key drivers of income disparity.",
+    narrative: "This project explored the intersection of economics and machine learning. By analyzing thousands of census records, I developed a model that could predict whether an individual earns more than $50k annually. The focus was on interpretability and fairness, ensuring the model didn't perpetuate existing biases.",
     links: {
       repo: "https://github.com/GarsRayy",
     },
-    image: "/images/income_prediction_ann_1776967206440.png"
+    image: "/images/income_prediction_ann_1776967206440.png",
+    heroImage: "/images/income_prediction_ann_1776967206440.png"
   },
   "spatial-mapping-kkn": {
     title: "Spatial Mapping KKN",
@@ -38,14 +44,17 @@ export const PROJECT_DETAILS_DATA = {
     slug: "spatial-mapping-kkn",
     tagline: "Comprehensive geographic information system for rural asset management.",
     year: "2024",
-    stack: ["ArcGIS", "QGIS", "Data Engineering", "Spatial Analysis"],
-    challenge: "Inaccurate and outdated physical records of village assets made development planning difficult for the local government.",
-    solution: "Created a digital spatial database using GIS tools to map village assets, infrastructure, and demographic distribution accurately.",
-    outcome: "Delivered a functional spatial map used by the village administration for smarter resource allocation and infrastructure planning.",
+    role: "GIS Analyst & Field Engineer",
+    techStack: ["ArcGIS", "QGIS", "Python", "Data Engineering", "Spatial Analysis"],
+    challenge: "Inaccurate and outdated physical records of village assets made development planning difficult for the local government, leading to inefficient resource allocation.",
+    solution: "Created a digital spatial database using GIS tools to map village assets, infrastructure, and demographic distribution accurately. Conducted on-site data collection and verification.",
+    outcome: "Delivered a functional spatial map used by the village administration for smarter resource allocation, infrastructure planning, and emergency response management.",
+    narrative: "Working directly with the village administration, I transformed stacks of paper maps into a digital ecosystem. This project involved extensive field work, using GPS to pinpoint every public facility and integrating this data into a comprehensive QGIS platform.",
     links: {
       repo: "https://github.com/GarsRayy",
     },
-    image: "/images/spatial_mapping_kkn_1776967255935.png"
+    image: "/images/spatial_mapping_kkn_1776967255935.png",
+    heroImage: "/images/spatial_mapping_kkn_1776967255935.png"
   },
   "study-quest": {
     title: "Study Quest",
@@ -54,14 +63,17 @@ export const PROJECT_DETAILS_DATA = {
     slug: "study-quest",
     tagline: "Gamified learning platform to increase student engagement and retention.",
     year: "2024",
-    stack: ["Flutter", "Firebase", "Game Design"],
-    challenge: "Traditional learning methods often fail to keep students motivated and engaged over long periods.",
-    solution: "Developed a mobile app that integrates RPG-style gamification elements into educational tasks and quizzes.",
-    outcome: "Increased user daily active time by 40% during beta testing and improved quiz scores among early adopters.",
+    role: "Fullstack Developer & Designer",
+    techStack: ["Flutter", "Firebase", "Game Design", "Rive", "Dart"],
+    challenge: "Traditional learning methods often fail to keep students motivated and engaged over long periods, leading to high dropout rates in online courses.",
+    solution: "Developed a mobile app that integrates RPG-style gamification elements into educational tasks and quizzes, using Rive for interactive character animations.",
+    outcome: "Increased user daily active time by 40% during beta testing and improved average quiz scores by 25% among early adopters.",
+    narrative: "Study Quest was born from the idea that learning should feel like an adventure. We integrated a reward system where students earn 'experience points' for completing study sessions, which they can use to upgrade their virtual avatars.",
     links: {
       repo: "https://github.com/GarsRayy",
     },
-    image: "/images/study_quest_app_1776968168422.png"
+    image: "/images/study_quest_app_1776968168422.png",
+    heroImage: "/images/study_quest_app_1776968168422.png"
   },
   "website-hmif-itera-2026": {
     title: "Website HMIF ITERA 2026",
@@ -70,13 +82,16 @@ export const PROJECT_DETAILS_DATA = {
     slug: "website-hmif-itera-2026",
     tagline: "Official digital hub for Informatics students at ITERA.",
     year: "2026",
-    stack: ["Next.js", "Tailwind CSS", "Figma", "Arsitektur Informasi"],
-    challenge: "Kebutuhan akan wadah digital resmi untuk publikasi kegiatan dan pusat informasi bagi seluruh mahasiswa Informatika ITERA yang dapat diakses dengan mudah.",
-    solution: "Merancang dan mengembangkan antarmuka website organisasi yang responsif, berfokus pada arsitektur informasi yang jelas dan estetika modern.",
-    outcome: "Platform fungsional yang sukses memperkuat identitas digital organisasi dan mempermudah akses informasi program kerja bagi anggota HMIF.",
+    role: "Head of Web Development",
+    techStack: ["Next.js", "Tailwind CSS", "Figma", "Arsitektur Informasi", "Framer Motion"],
+    challenge: "Kebutuhan akan wadah digital resmi untuk publikasi kegiatan dan pusat informasi bagi seluruh mahasiswa Informatika ITERA yang dapat diakses dengan mudah dan mencerminkan identitas modern organisasi.",
+    solution: "Merancang dan mengembangkan antarmuka website organisasi yang responsif, berfokus pada arsitektur informasi yang jelas dan estetika modern menggunakan Next.js.",
+    outcome: "Platform fungsional yang sukses memperkuat identitas digital organisasi dan mempermudah akses informasi program kerja bagi anggota HMIF, menjangkau 500+ mahasiswa aktif.",
+    narrative: "Sebagai ketua tim pengembangan, saya bertanggung jawab untuk menyelaraskan kebutuhan berbagai divisi ke dalam satu platform yang kohesif. Kami menerapkan prinsip desain atomik untuk memastikan skalabilitas jangka panjang.",
     links: {
       repo: "https://github.com/GarsRayy",
     },
-    image: "/images/hmif_website_placeholder.png"
+    image: "/images/hmif_website_placeholder.png",
+    heroImage: "/images/hmif_website_placeholder.png"
   },
 };

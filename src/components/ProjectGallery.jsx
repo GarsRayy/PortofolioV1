@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Gsap } from "../utils/gsapAnimate";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -35,6 +36,7 @@ export default function ProjectGallery({ onOpenProject }) {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [enablePinnedScroll, setEnablePinnedScroll] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -381,6 +383,13 @@ export default function ProjectGallery({ onOpenProject }) {
               </div>
             </Gsap.div>
           ))}
+          {/* View All Button Mobile */}
+          <button 
+            onClick={() => navigate('/projects')}
+            className="w-full py-6 mt-4 border-2 border-garnet text-garnet rounded-lg font-mono text-xs font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:scale-[0.98] transition-transform"
+          >
+            Explore All Projects <ArrowRight size={16} />
+          </button>
           <div className="shrink-0 w-2" />
         </div>
       </section>
@@ -511,6 +520,26 @@ export default function ProjectGallery({ onOpenProject }) {
               </Gsap.div>
             </Gsap.div>
           ))}
+
+          {/* Outro Card / View All Desktop */}
+          <Gsap.div
+            className="flex flex-col justify-center items-start shrink-0 h-[70vh] w-[40vw] px-12"
+          >
+            <div className="h-[1px] w-24 bg-garnet/30 mb-8" />
+            <h2 className="text-5xl lg:text-7xl font-black text-white uppercase leading-tight mb-8">
+              Curious for<br />
+              <span className="text-garnet italic">More?</span>
+            </h2>
+            <button 
+              onClick={() => navigate('/projects')}
+              className="group flex items-center gap-6 bg-garnet text-ivory px-10 py-5 rounded-full font-mono text-sm font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-charcoal transition-all duration-500 shadow-2xl"
+            >
+              Browse Full Index
+              <div className="w-8 h-8 bg-black/10 rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">
+                <ArrowRight size={18} />
+              </div>
+            </button>
+          </Gsap.div>
 
           <div className="shrink-0 w-[10vw]"></div>
         </Gsap.div>

@@ -1,7 +1,7 @@
-import { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Gsap } from '../utils/gsapAnimate';
-import { Sparkles, Camera, PenTool, Layout } from 'lucide-react';
+import { Sparkles, Camera, PenTool, Layout, ArrowRight } from 'lucide-react';
 
 const BentoCard = ({ children, className, title, icon: Icon }) => {
   const x = useMotionValue(0);
@@ -57,6 +57,7 @@ const BentoCard = ({ children, className, title, icon: Icon }) => {
 };
 
 const VisualPlayground = () => {
+  const navigate = useNavigate();
   return (
     <section id="playground" className="py-24 bg-ivory overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -126,6 +127,19 @@ const VisualPlayground = () => {
             <span className="text-5xl font-clash font-bold mb-2">50+</span>
             <span className="font-mono text-xs uppercase tracking-widest opacity-80">Designs Created</span>
           </div>
+        </div>
+
+        {/* View More CTA */}
+        <div className="mt-16 flex justify-center">
+          <button 
+            onClick={() => navigate('/archives')}
+            className="group flex items-center gap-6 bg-charcoal text-ivory px-10 py-5 rounded-full font-mono text-sm font-bold uppercase tracking-[0.2em] hover:bg-garnet transition-all duration-500 shadow-2xl"
+          >
+            Explore Creative Archives
+            <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform">
+              <ArrowRight size={18} />
+            </div>
+          </button>
         </div>
       </div>
     </section>

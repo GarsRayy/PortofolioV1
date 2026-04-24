@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, Github, ExternalLink } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { ArrowLeft, ArrowUpRight, Github, ExternalLink, Calendar, Briefcase, Cpu } from 'lucide-react';
 import { PROJECT_DETAILS_DATA as projectDetailsData } from '../data/projectDetailsData';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -9,6 +10,15 @@ const ProjectDetail = () => {
   const { id, slug } = useParams();
   const projectId = id || slug;
   const project = projectDetailsData[projectId] || Object.values(projectDetailsData).find(p => p.slug === projectId);
+  
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 0.5], ["0%", "20%"]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   if (!project) {
     return (
@@ -23,121 +33,180 @@ const ProjectDetail = () => {
     );
   }
 
+  const fadeIn = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+  };
+
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="bg-ivory text-charcoal min-h-screen font-jakarta"
-    >
+    <div ref={containerRef} className="bg-ivory text-charcoal min-h-screen font-jakarta overflow-x-hidden">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
-        <motion.img 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          src={project.heroImage || project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ivory via-transparent to-transparent opacity-60" />
+      {/* Full-bleed Hero Header */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-charcoal">
+        <motion.div 
+          style={{ y: headerY, opacity: headerOpacity }}
+          className="absolute inset-0 z-0"
+        >
+          <img 
+            src={project.heroImage || project.image} 
+            alt={project.title}
+            className="w-full h-full object-cover opacity-60 grayscale-[20%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-charcoal/20 to-charcoal" />
+        </motion.div>
+
+        <div className="relative z-10 text-center px-6 max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="inline-block px-4 py-2 bg-garnet text-ivory font-mono text-[10px] font-bold uppercase tracking-[0.3em] mb-8 rounded-full">
+              Case Study — {project.year}
+            </span>
+            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-clash font-black text-ivory uppercase tracking-tighter leading-[0.85] mb-12 italic">
+              {project.title.split(' ').map((word, i) => (
+                <span key={i} className={i % 2 === 1 ? 'text-garnet' : ''}>{word} </span>
+              ))}
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-widest text-ivory/40">Scroll to Explore</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-garnet to-transparent" />
+        </motion.div>
       </section>
 
-      {/* Content Section */}
-      <main className="max-w-7xl mx-auto px-6 -mt-32 relative z-10 pb-24">
-        <div className="bg-white/80 backdrop-blur-xl p-8 md:p-16 rounded-3xl border border-charcoal/5 shadow-2xl">
-          
-          {/* Title & Description */}
-          <div className="mb-16">
-            <motion.h1 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-clash font-black text-garnet uppercase tracking-tighter leading-none mb-8"
-            >
-              {project.title}
-            </motion.h1>
-            <motion.p 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-xl md:text-2xl text-charcoal/70 leading-relaxed max-w-4xl"
-            >
-              {project.subtitle || project.description}
-            </motion.p>
+      {/* Sticky Stats Bar */}
+      <div className="sticky top-0 z-40 bg-ivory/80 backdrop-blur-xl border-b border-charcoal/5 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-8">
+          <div className="flex items-center gap-3">
+            <Briefcase size={16} className="text-garnet" />
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-charcoal/40">Role</p>
+              <p className="text-xs font-bold text-charcoal">{project.role}</p>
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            
-            {/* Left Column: Sticky Metadata */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-32 space-y-12">
-                <div className="space-y-2">
-                  <h3 className="font-mono text-[10px] uppercase tracking-widest text-garnet font-bold">Role</h3>
-                  <p className="text-lg font-bold text-charcoal">{project.role}</p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-mono text-[10px] uppercase tracking-widest text-garnet font-bold">Timeline</h3>
-                  <p className="text-lg font-bold text-charcoal">{project.year || '2025'}</p>
-                </div>
-                <div className="space-y-4">
-                  <h3 className="font-mono text-[10px] uppercase tracking-widest text-garnet font-bold">Tech Stack</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack?.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-charcoal/5 rounded-full text-xs font-bold text-charcoal/70 border border-charcoal/5">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="pt-8 flex flex-col gap-4">
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-charcoal hover:text-garnet transition-colors group">
-                      <ExternalLink size={18} /> <span className="font-bold">Live Preview</span> <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-charcoal hover:text-garnet transition-colors group">
-                      <Github size={18} /> <span className="font-bold">Source Code</span> <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
-                </div>
-              </div>
+          <div className="flex items-center gap-3">
+            <Cpu size={16} className="text-garnet" />
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-charcoal/40">Tech Stack</p>
+              <p className="text-xs font-bold text-charcoal">{project.techStack?.join(', ')}</p>
             </div>
-
-            {/* Right Column: Narrative */}
-            <div className="lg:col-span-2 space-y-24">
-              {project.sections?.map((section, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ y: 30, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  className="space-y-6"
-                >
-                  <h2 className="text-3xl md:text-4xl font-clash font-bold text-charcoal uppercase tracking-tight">
-                    {section.title}
-                  </h2>
-                  <div className="prose prose-lg text-charcoal/70 font-jakarta leading-relaxed max-w-none">
-                    {section.content}
-                  </div>
-                  {section.image && (
-                    <div className="rounded-2xl overflow-hidden shadow-xl border border-charcoal/5 mt-8">
-                      <img src={section.image} alt={section.title} className="w-full h-auto" />
-                    </div>
-                  )}
-                </motion.div>
-              ))}
+          </div>
+          <div className="flex items-center gap-3">
+            <Calendar size={16} className="text-garnet" />
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-charcoal/40">Timeline</p>
+              <p className="text-xs font-bold text-charcoal">{project.year}</p>
             </div>
-
+          </div>
+          <div className="flex items-center gap-6">
+            {project.links?.repo && (
+              <a href={project.links.repo} target="_blank" rel="noreferrer" className="text-charcoal hover:text-garnet transition-colors">
+                <Github size={20} />
+              </a>
+            )}
+            <button className="bg-charcoal text-ivory px-6 py-2.5 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-garnet transition-all">
+              Live Preview
+            </button>
           </div>
         </div>
+      </div>
+
+      {/* Narrative Sections */}
+      <main className="relative">
+        
+        {/* The Challenge - Garnet Accent */}
+        <section className="py-24 md:py-40 px-6">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <motion.div {...fadeIn} className="lg:col-span-4">
+              <h2 className="text-sm font-mono font-bold text-garnet uppercase tracking-[0.3em] mb-4">01. The Challenge</h2>
+              <h3 className="text-4xl md:text-5xl font-clash font-bold text-charcoal leading-none uppercase italic">The Problem<br />Statement.</h3>
+            </motion.div>
+            <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="lg:col-span-8">
+              <p className="text-2xl md:text-3xl text-charcoal/80 leading-snug font-medium mb-8">
+                {project.challenge}
+              </p>
+              <div className="w-24 h-1 bg-garnet" />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Big Narrative - Ivory Clean */}
+        <section className="py-24 md:py-40 px-6 bg-white shadow-inner">
+          <div className="max-w-4xl mx-auto">
+            <motion.div {...fadeIn} className="space-y-12">
+              <div className="inline-block px-4 py-2 bg-charcoal/5 border border-charcoal/10 rounded-lg font-mono text-[10px] font-bold uppercase tracking-widest">
+                Deep Dive Narrative
+              </div>
+              <p className="text-xl md:text-2xl text-charcoal/70 leading-relaxed font-serif italic">
+                "{project.narrative}"
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* The Solution & Outcome - Contrasting Blocks */}
+        <section className="py-24 md:py-40 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-charcoal/5 border border-charcoal/5 rounded-3xl overflow-hidden shadow-2xl">
+              
+              {/* Solution */}
+              <motion.div 
+                {...fadeIn}
+                className="bg-white p-12 md:p-20"
+              >
+                <h2 className="text-sm font-mono font-bold text-garnet uppercase tracking-[0.3em] mb-8">02. The Solution</h2>
+                <p className="text-xl md:text-2xl text-charcoal/80 leading-relaxed">
+                  {project.solution}
+                </p>
+              </motion.div>
+
+              {/* Outcome */}
+              <motion.div 
+                {...fadeIn}
+                transition={{ delay: 0.3 }}
+                className="bg-garnet p-12 md:p-20 text-ivory"
+              >
+                <h2 className="text-sm font-mono font-bold text-ivory/60 uppercase tracking-[0.3em] mb-8">03. The Outcome</h2>
+                <p className="text-xl md:text-2xl leading-relaxed font-bold">
+                  {project.outcome}
+                </p>
+                <ArrowUpRight size={64} className="mt-12 opacity-20" />
+              </motion.div>
+
+            </div>
+          </div>
+        </section>
+
       </main>
 
+      {/* Next Project Footer Hook */}
+      <section className="py-32 bg-charcoal text-center px-6">
+        <motion.div {...fadeIn}>
+          <p className="font-mono text-xs text-ivory/40 uppercase tracking-[0.4em] mb-8">Ready for another story?</p>
+          <Link to="/projects" className="group inline-block">
+            <h2 className="text-5xl md:text-7xl font-clash font-black text-ivory uppercase tracking-tighter hover:text-garnet transition-colors duration-500">
+              View All <span className="italic">Case Studies</span>
+            </h2>
+            <div className="w-0 group-hover:w-full h-2 bg-garnet mt-4 transition-all duration-700 mx-auto" />
+          </Link>
+        </motion.div>
+      </section>
+
       <Footer />
-    </motion.div>
+    </div>
   );
 };
 
