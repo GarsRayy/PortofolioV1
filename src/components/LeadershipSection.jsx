@@ -30,7 +30,7 @@ const organizations = [
 
 const LeadershipSection = () => {
   return (
-    <section className="py-24 bg-ivory">
+    <section id="leadership-section" className="py-24 bg-ivory">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center gap-3 mb-14">
           <span className="w-2 h-2 rounded-full bg-garnet" />

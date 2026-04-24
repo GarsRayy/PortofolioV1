@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { label: 'Experience', sectionId: 'experience-section' },
   { label: 'Work', sectionId: 'project-section' },
   { label: 'Creative', sectionId: 'playground' },
-  { label: "Let's Connect", sectionId: 'contact-section' },
+  { label: 'Leadership', sectionId: 'leadership-section' },
 ];
 
 const DARK_SECTION_IDS = ['project-section'];
@@ -192,7 +192,7 @@ const Navbar = memo(function Navbar() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.28 }}
-                onClick={() => scrollTo('experience-section')}
+                onClick={() => scrollTo('contact-section')}
                 className={`w-full max-w-md mx-auto mt-6 h-12 rounded-full text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-2 shadow-[0_10px_24px_rgba(0,0,0,0.16)] ${isOnDarkSection ? 'bg-ivory text-charcoal' : 'bg-charcoal text-ivory'}`}
               >
                 Let's Talk
@@ -237,7 +237,7 @@ const Navbar = memo(function Navbar() {
       <div className="hidden lg:flex pointer-events-auto">
         <Magnetic>
           <button
-            onClick={() => scrollTo('experience-section')}
+            onClick={() => scrollTo('contact-section')}
             className={`group relative overflow-hidden flex items-center gap-3 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.12em] md:tracking-[0.16em] hover:shadow-[0_0_30px_rgba(140,16,7,0.3)] transition-all duration-500 ${isOnDarkSection ? 'bg-ivory text-charcoal' : 'bg-charcoal text-ivory'}`}
           >
             {/* Core Label */}

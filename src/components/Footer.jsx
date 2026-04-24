@@ -102,7 +102,8 @@ const Footer = memo(function Footer() {
               {[
                 { label: 'About', id: 'about-section' },
                 { label: 'Creative', id: 'playground' },
-                { label: 'Experience', id: 'experience-section' }
+                { label: 'Experience', id: 'experience-section' },
+                { label: 'Leadership', id: 'leadership-section' }
               ].map((item) => (
                 <button
                   key={item.label}
