@@ -37,7 +37,7 @@ const OFF_TOPIC_PATTERNS = [
   /\b(hitung|calculate|berapa\s+\d|what\s+is\s+\d|\d\s*[+\-*/]\s*\d)/i,
   // General knowledge / trivia
   /\b(siapa\s+presiden|who\s+is\s+the\s+president|capital\s+of|ibu\s*kota)\b/i,
-  /\b(apa\s+itu|what\s+is)\s+(?!zickrian|portofolio|portfolio|project|projek)/i,
+  /\b(apa\s+itu|what\s+is)\s+(?!garis|rayya|portofolio|portfolio|project|projek)/i,
   // Weather, news, etc.
   /\b(cuaca|weather|berita|news|gosip)\b/i,
   // Translation / language tasks

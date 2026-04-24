@@ -20,6 +20,8 @@ const NoiseOverlay = lazy(() => import('../components/NoiseOverlay'));
 export default function Home() {
   const navigate = useNavigate();
   const location = useLocation();
+  const containerRef = useRef(null);
+  const heroRef = useRef(null);
   const galleryRef = useRef(null);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -37,9 +39,49 @@ export default function Home() {
     }
   }, []);
 
+  // GSAP Stacking Animation
+  useEffect(() => {
+    if (isLoading || typeof window === 'undefined') return;
+
+    let ctx;
+    const initAnimation = async () => {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        const isDesktop = window.innerWidth >= 1024;
+        
+        if (isDesktop) {
+          // Pin Hero and animate scale/opacity
+          gsap.to(heroRef.current, {
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom top",
+              pin: true,
+              pinSpacing: false,
+              scrub: true,
+              invalidateOnRefresh: true
+            },
+            scale: 0.9,
+            opacity: 0.4,
+            ease: "none"
+          });
+          
+          // Force a refresh once lazy-loaded components might have shifted layout
+          setTimeout(() => ScrollTrigger.refresh(), 1000);
+        }
+      }, containerRef);
+    };
+
+    initAnimation();
+    return () => ctx && ctx.revert();
+  }, [isLoading]);
+
   useEffect(() => {
     const profileImg = new Image();
-    profileImg.src = "/profile.webp";
+    profileImg.src = "/profile-hero.png";
   }, []);
 
   useEffect(() => {
@@ -59,7 +101,7 @@ export default function Home() {
   }, [navigate, location]);
 
   return (
-    <div className="bg-ivory text-charcoal selection:bg-garnet selection:text-ivory relative font-jakarta">
+    <div ref={containerRef} className="bg-ivory text-charcoal selection:bg-garnet selection:text-ivory relative font-jakarta">
       {isLoading && (
         <Preloader
           onComplete={() => {
@@ -74,23 +116,28 @@ export default function Home() {
 
       <Cursor />
       <Navbar />
-      <HeroSection isRevealed={true} />
       
-      <Suspense fallback={null}><AboutSection /></Suspense>
-      
-      <Suspense fallback={null}><ProfessionalExperience /></Suspense>
-
-      <div id="project-section" ref={galleryRef} className="bg-charcoal">
-        <Suspense fallback={<div className="h-screen bg-charcoal" />}>
-          <ProjectGallery onOpenProject={handleOpenProject} />
-        </Suspense>
+      <div ref={heroRef} className="z-0">
+        <HeroSection isRevealed={!isLoading} />
       </div>
-
-      <Suspense fallback={null}><VisualPlayground /></Suspense>
-      <Suspense fallback={null}><LeadershipSection /></Suspense>
-      <Suspense fallback={null}><RecognitionSection /></Suspense>
       
-      <Suspense fallback={null}><Footer /></Suspense>
+      <div className="relative z-10 bg-ivory shadow-[0_-50px_100px_rgba(0,0,0,0.1)]">
+        <Suspense fallback={null}><AboutSection /></Suspense>
+        
+        <Suspense fallback={null}><ProfessionalExperience /></Suspense>
+
+        <div id="project-section" ref={galleryRef} className="bg-charcoal">
+          <Suspense fallback={<div className="h-screen bg-charcoal" />}>
+            <ProjectGallery onOpenProject={handleOpenProject} />
+          </Suspense>
+        </div>
+
+        <Suspense fallback={null}><VisualPlayground /></Suspense>
+        <Suspense fallback={null}><LeadershipSection /></Suspense>
+        <Suspense fallback={null}><RecognitionSection /></Suspense>
+        
+        <Suspense fallback={null}><Footer /></Suspense>
+      </div>
     </div>
   );
 }

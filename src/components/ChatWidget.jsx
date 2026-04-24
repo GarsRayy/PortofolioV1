@@ -29,7 +29,7 @@ const COMMANDS = {
             "  clear      Clear terminal",
             "  ──────────────────────────────",
             "",
-            "  Or just ask me anything about Zickrian!"
+            "  Or just ask me anything about Garis Rayya!"
         ].join('\n')
     },
     ls: {
@@ -60,7 +60,7 @@ const COMMANDS = {
             }
             return [
                 "        ╭──────────────────────╮",
-                "  ⣿⣿    │  zickrian@portfolio   │",
+                "  ⣿⣿    │  garisrayya@portfolio   │",
                 "  ⣿⣿    ╰──────────────────────╯",
                 "  ⣿⣿    ─────────────────────────",
                 `  ⣿⣿    Name     : ${p.name}`,
@@ -175,7 +175,7 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
     const isOpen = controlledIsOpen ?? internalIsOpen;
     const setIsOpen = onOpenChange ?? setInternalIsOpen;
     const [messages, setMessages] = useState([
-        { type: 'bot', text: "System Online. I'm Zickrian's AI Assistant. Type `help` for commands, or ask me anything!" }
+        { type: 'bot', text: "System Online. I'm Garis Rayya's AI Assistant. Type `help` for commands, or ask me anything!" }
     ]);
     const [inputValue, setInputValue] = useState("");
     const [isTyping, setIsTyping] = useState(false);
@@ -481,7 +481,7 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
                                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
                             </div>
-                            <span className="ml-2 text-neutral-400 text-xs">zickrian_bot - -bash</span>
+                            <span className="ml-2 text-neutral-400 text-xs">garisrayya_bot - -bash</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <span className="text-neutral-600 text-[10px] hidden md:inline">Ctrl+K</span>
@@ -518,12 +518,12 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
                                     </div>
                                 ) : (
                                     <div className={`flex gap-2 relative ${msg.isError ? 'text-red-400' : 'text-neutral-300'}`}>
-                                        <span className={`shrink-0 select-none ${msg.isError ? 'text-red-400' : 'text-cyan-400'}`}>●</span>
+                                        <span className={`shrink-0 select-none ${msg.isError ? 'text-red-400' : 'text-ivory'}`}>●</span>
                                         <div className="flex-1 min-w-0">
                                             {msg.isTerminal ? (
                                                 <pre className="whitespace-pre-wrap text-[12px] text-neutral-300 font-mono leading-relaxed">{msg.text}</pre>
                                             ) : (
-                                                <div className="prose prose-invert prose-sm max-w-none prose-p:my-0 prose-ul:my-1 prose-li:my-0 prose-code:bg-neutral-800 prose-code:px-1 prose-code:rounded prose-code:text-yellow-300 prose-a:text-blue-400 hover:prose-a:text-blue-300">
+                                                <div className="prose prose-invert prose-sm max-w-none prose-p:my-0 prose-ul:my-1 prose-li:my-0 prose-code:bg-neutral-800 prose-code:px-1 prose-code:rounded prose-code:text-ivory prose-a:text-blue-400 hover:prose-a:text-blue-300">
                                                     <Suspense fallback={<span>{msg.text}</span>}>
                                                         <ReactMarkdown
                                                             components={{
@@ -553,7 +553,7 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
 
                         {isTyping && (
                             <div className="flex gap-2 text-neutral-500">
-                                <span className="shrink-0 text-cyan-400 select-none">●</span>
+                                <span className="shrink-0 text-garnet select-none">●</span>
                                 <span className="animate-pulse">_</span>
                             </div>
                         )}
@@ -591,7 +591,7 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
             {/* Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="group flex items-center justify-center w-11 h-11 md:w-14 md:h-14 bg-black border border-neutral-800 text-lime-400 shadow-lg hover:bg-neutral-900 transition-all rounded-full"
+                className="group flex items-center justify-center w-11 h-11 md:w-14 md:h-14 bg-black border border-neutral-800 text-garnet shadow-lg hover:bg-neutral-900 transition-all rounded-full"
                 aria-label={isOpen ? "Close terminal" : "Open terminal (Ctrl+K)"}
             >
                 {isOpen ? <X size={20} /> : <Terminal size={20} className="group-hover:scale-110 transition-transform" />}

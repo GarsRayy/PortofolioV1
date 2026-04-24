@@ -1,8 +1,8 @@
-import { memo, useRef, useState, useEffect } from 'react';
+import { memo, useRef, useEffect, useState } from 'react';
 import { Gsap, useGsapReducedMotion, useGsapScroll, useGsapTransform } from '../utils/gsapAnimate';
 import { Terminal, Code2, Database, Cpu, Download, ArrowUpRight } from 'lucide-react';
 
-// Shared Intl formatter — created once, reused on every tick
+// Shared Intl formatter
 const jakartaFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: 'Asia/Jakarta',
   hour: '2-digit',
@@ -12,7 +12,6 @@ const jakartaFormatter = new Intl.DateTimeFormat('en-US', {
 });
 
 // === LOCATION & TIME BADGE ===
-// Uses direct DOM update via ref to avoid React re-renders every second
 const LocationTimeBadge = () => {
   const timeRef = useRef(null);
 
@@ -28,41 +27,30 @@ const LocationTimeBadge = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-3 sm:gap-5 font-mono text-xs uppercase tracking-[0.15em] text-black/50">
+    <div className="flex items-center justify-center gap-5 font-mono text-xs uppercase tracking-[0.2em] text-charcoal/50">
       <div className="flex items-center gap-2">
-        <span className="font-bold text-black/70">Based in Indonesia</span>
+        <span className="font-extrabold text-charcoal">Based in Indonesia</span>
       </div>
-      <div className="w-[1px] h-3 bg-black/15" />
+      <div className="w-[1px] h-3 bg-charcoal/20" />
       <div className="flex items-center gap-1.5 tabular-nums">
-        <span className="text-black/40 hidden sm:inline">LOCAL:</span>
-        <span ref={timeRef} className="font-bold text-black/70" />
+        <span ref={timeRef} className="font-extrabold text-charcoal" />
       </div>
     </div>
   );
 };
 
-// === DECORATIVE ORBITING ELEMENTS (Left & Right) ===
+// === DECORATIVE ORBITING ELEMENTS ===
 const OrbitingDecoration = ({ icon: Icon, delay, className, isRevealed, enableAmbientMotion }) => (
   <Gsap.div
     initial={false}
-    animate={
-      isRevealed
-        ? { opacity: 1, y: 0, scale: 1 }
-        : { opacity: 0, y: 12, scale: 0.9 }
-    }
-    transition={{
-      opacity: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-      y: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-      scale: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-    }}
-    className={`absolute flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-garnet/20 bg-ivory/60 backdrop-blur-lg shadow-[0_10px_30px_rgba(140,16,7,0.12)] ${className}`}
+    animate={isRevealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+    transition={{ duration: 0.8, delay }}
+    className={`absolute flex items-center justify-center w-12 h-12 rounded-full border border-garnet/20 bg-ivory/60 backdrop-blur-lg shadow-[0_10px_30px_rgba(140,16,7,0.1)] z-20 ${className}`}
     style={enableAmbientMotion && isRevealed ? {
-      animation: `hero-float 5.8s ${delay + 0.35}s ease-in-out infinite`,
-      willChange: 'transform',
+      animation: `hero-float 5s ${delay}s ease-in-out infinite`,
     } : undefined}
   >
-    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-garnet/25 to-transparent" />
-    <Icon size={18} className="relative text-black/65" />
+    <Icon size={18} className="text-garnet" />
   </Gsap.div>
 );
 
@@ -70,7 +58,6 @@ const OrbitingDecoration = ({ icon: Icon, delay, className, isRevealed, enableAm
 const HeroSection = memo(function HeroSection({ isRevealed = true }) {
   const containerRef = useRef(null);
   const reduceMotion = useGsapReducedMotion();
-  const [enableParallax, setEnableParallax] = useState(false);
   const [enableAmbientMotion, setEnableAmbientMotion] = useState(false);
 
   const { scrollYProgress } = useGsapScroll({
@@ -78,219 +65,141 @@ const HeroSection = memo(function HeroSection({ isRevealed = true }) {
     offset: ["start start", "end start"],
   });
 
-  // Subtle scroll parallax
-  const bgY = useGsapTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const contentY = useGsapTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  // Subtle scroll parallax for layers
+  const textY = useGsapTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const imgScale = useGsapTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || reduceMotion) {
-      setEnableParallax(false);
-      setEnableAmbientMotion(false);
-      return;
+    if (typeof window !== 'undefined' && !reduceMotion) {
+      setEnableAmbientMotion(window.innerWidth >= 1024);
     }
-
-    const parallaxMedia = window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)');
-    const updateParallax = () => {
-      setEnableParallax(parallaxMedia.matches);
-      setEnableAmbientMotion(parallaxMedia.matches);
-    };
-
-    updateParallax();
-
-    if (parallaxMedia.addEventListener) {
-      parallaxMedia.addEventListener('change', updateParallax);
-    } else {
-      parallaxMedia.addListener(updateParallax);
-    }
-
-    return () => {
-      if (parallaxMedia.removeEventListener) {
-        parallaxMedia.removeEventListener('change', updateParallax);
-      } else {
-        parallaxMedia.removeListener(updateParallax);
-      }
-    };
   }, [reduceMotion]);
 
   return (
     <header
       ref={containerRef}
       id="hero-section"
-      className="min-h-[100svh] w-full relative bg-ivory selection:bg-garnet selection:text-ivory overflow-hidden flex flex-col items-center justify-center pt-16 pb-16"
+      className="relative h-[100svh] w-full bg-ivory overflow-hidden flex flex-col items-center"
     >
       {/* ── BACKGROUND ENGINEERING Grid & Dynamic Glow ── */}
-      <Gsap.div
-        initial={false}
-        animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        style={enableParallax ? { y: bgY } : undefined}
-        className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center"
-      >
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(140,16,7,0.12),transparent_48%),linear-gradient(to_bottom,rgba(140,16,7,0.04),transparent_48%)]" />
-
-        {/* 1. Base Moving Grid */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Base Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: 'linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)',
             backgroundSize: '40px 40px',
-            ...(enableAmbientMotion && isRevealed ? { animation: 'hero-grid-scroll 14s linear infinite' } : {}),
           }}
         />
 
-        {/* 2. Plus/Cross Pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M40 38v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z' fill='%23000000' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundPosition: 'center center'
-          }}
-        />
+        {/* Floating Circles & Gradients */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[900px] max-h-[900px] rounded-full border border-garnet/5 z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[700px] max-h-[700px] rounded-full border border-garnet/5 z-0" />
+        
+        {/* Glow Orbs */}
+        <div className="absolute top-1/4 right-[15%] w-[400px] h-[400px] bg-garnet/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 left-[15%] w-[500px] h-[500px] bg-garnet/5 rounded-full blur-[120px]" />
+      </div>
 
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 18% 18%, rgba(140, 16, 7, 0.14), transparent 44%), radial-gradient(circle at 82% 15%, rgba(140, 16, 7, 0.1), transparent 42%), radial-gradient(circle at 50% 85%, rgba(140, 16, 7, 0.09), transparent 50%), linear-gradient(135deg, rgba(140, 16, 7, 0.02), rgba(140, 16, 7, 0.01))'
-          }}
-        />
-
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[920px] max-h-[920px] rounded-full border border-garnet/10" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72vw] h-[72vw] max-w-[720px] max-h-[720px] rounded-full border border-garnet/10" />
-
-        {/* 3. Dynamic Organic Glowing Orbs — CSS animations for zero JS overhead */}
-        <div
-          className="absolute top-1/2 left-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-garnet rounded-full blur-[90px] lg:blur-[130px] opacity-[0.1]"
-          style={enableAmbientMotion && isRevealed ? {
-            animation: 'hero-orb-1 10s ease-in-out infinite',
-            willChange: 'transform',
-          } : { transform: 'translate3d(-50%, -50%, 0)' }}
-        />
-        <div
-          className="absolute top-1/4 right-[20%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-garnet rounded-full blur-[90px] lg:blur-[120px] opacity-[0.06]"
-          style={enableAmbientMotion && isRevealed ? {
-            animation: 'hero-orb-2 12s 2s ease-in-out infinite',
-            willChange: 'transform',
-          } : undefined}
-        />
-        <div
-          className="absolute bottom-[10%] left-[20%] w-[45vw] h-[45vw] max-w-[650px] max-h-[650px] bg-garnet rounded-full blur-[100px] lg:blur-[130px] opacity-[0.08]"
-          style={enableAmbientMotion && isRevealed ? {
-            animation: 'hero-orb-3 15s 1s ease-in-out infinite',
-            willChange: 'transform',
-          } : undefined}
-        />
-
-        {/* 4. Radial Vignette to blend gracefully with section edges */}
-        <div className="absolute inset-0 bg-ivory [mask-image:radial-gradient(circle_at_center,transparent_0%,black_100%)] opacity-75" />
-
-        {/* Soft bottom fade */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ivory to-transparent pointer-events-none" />
-      </Gsap.div>
-
-      {/* ── MAIN CONTENT (PERFECTLY CENTERED) ── */}
-      {/* Parallax wrapper (scroll-driven y only) */}
-      <Gsap.div
-        style={enableParallax ? { y: contentY } : undefined}
-        className="relative z-10 w-full max-w-[1200px] px-5 sm:px-6 md:px-12 flex flex-col items-center text-center mt-8"
-      >
-        {/* Iris reveal + entrance wrapper */}
+      <div className="relative z-10 w-full h-full flex flex-col items-center">
+        
+        {/* ── Top Header ── */}
         <Gsap.div
           initial={false}
-          animate={isRevealed
-            ? { opacity: 1, y: 0, filter: 'blur(0px)', clipPath: 'circle(150% at 50% 100%)' }
-            : { opacity: 0, y: 14, filter: 'blur(3px)', clipPath: 'circle(0% at 50% 100%)' }
-          }
-          transition={{
-            clipPath: { duration: 1.25, ease: [0.2, 0.95, 0.3, 1] },
-            opacity: { duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
-            y: { duration: 1.0, delay: 0.08, ease: [0.22, 1, 0.36, 1] },
-            filter: { duration: 0.8, delay: 0.1 },
-          }}
-          className="w-full flex flex-col items-center"
-        >
-
-        {/* Location & Time — visible at top */}
-        <Gsap.div
-          initial={false}
-          animate={isRevealed ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.55, duration: 0.8 }}
-          className="mb-3 md:mb-4"
+          animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="pt-32 z-30"
         >
           <LocationTimeBadge />
         </Gsap.div>
 
-        {/* 2. Massive Clear Typography */}
-        <div className="flex flex-col items-center justify-center relative w-full mb-4 md:mb-5">
-          {/* Left Decoration */}
-          <OrbitingDecoration icon={Code2} delay={0.15} className="left-0 sm:left-2 lg:left-16 top-2" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
-          <OrbitingDecoration icon={Terminal} delay={0.45} className="left-6 sm:left-12 lg:left-28 bottom-8 hidden sm:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
-
+        {/* ── Layered Portrait Composition ── */}
+        <div className="relative flex-1 w-full flex items-end justify-center">
+          
+          {/* Layer 1: Background Typography (Moved Up & Scaled Down) */}
+          <Gsap.div
+            style={{ y: textY }}
+            className="absolute inset-0 flex flex-col items-center justify-start pointer-events-none z-0 select-none pt-42"
+          >
             <Gsap.h1
               initial={false}
-              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-              transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(4rem,14vw,9rem)] font-clash font-bold uppercase tracking-tight text-charcoal leading-[0.88]"
+              animate={isRevealed ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 1.1, y: 50 }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-clash font-black uppercase tracking-tighter text-[clamp(5rem,18vw,14rem)] leading-[0.75] text-center italic"
             >
-              GARIS
+              <span className="text-charcoal">GARIS</span><br />
+              <span className="text-garnet ml-[0.05em]">RAYYA</span>
             </Gsap.h1>
+          </Gsap.div>
 
-            <Gsap.h1
-              initial={false}
-              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-              transition={{ duration: 0.75, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(4rem,14vw,9rem)] font-clash font-bold uppercase tracking-tight text-transparent leading-[0.88] mt-2 sm:mt-0 font-outline-fallback"
+          {/* Floating Icons (Restored) */}
+          <OrbitingDecoration icon={Code2} delay={0.6} className="top-1/4 left-[15%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          <OrbitingDecoration icon={Database} delay={0.8} className="top-1/3 right-[18%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          <OrbitingDecoration icon={Terminal} delay={1.0} className="bottom-1/3 left-[20%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          <OrbitingDecoration icon={Cpu} delay={1.2} className="bottom-1/4 right-[25%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+
+          {/* Layer 2: Foreground Portrait (Scaled Up) */}
+          <Gsap.div
+            initial={false}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 150 }}
+            style={{ scale: imgScale }}
+            transition={{ duration: 1.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10 w-auto h-[90vh] flex items-end justify-center"
+          >
+            <img
+              src="/profile-hero.png"
+              alt="Garis Rayya"
+              className="h-full w-auto object-contain object-bottom grayscale brightness-110 hover:grayscale-0 transition-all duration-1000 ease-in-out select-none"
+            />
+          </Gsap.div>
+
+          {/* Metadata & Actions Group (Bottom) */}
+          
+          {/* Right Side Stack: Download CV + Roles */}
+          <Gsap.div
+            initial={false}
+            animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="absolute bottom-32 right-8 md:right-16 z-30 flex flex-col items-end text-right hidden sm:flex gap-6"
+          >
+            <a
+              href="/cv.pdf"
+              download
+              className="group flex items-center gap-4 border-2 border-charcoal text-charcoal px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-charcoal hover:text-ivory transition-all duration-500 rounded-sm bg-ivory/50 backdrop-blur-sm"
             >
-              RAYYA
-            </Gsap.h1>
+              Download CV <Download size={18} />
+            </a>
+            <div className="flex flex-col items-end">
+              <h2 className="text-xl md:text-2xl font-clash font-bold text-charcoal uppercase italic tracking-tight">
+                UI/UX Designer<br />& Data Specialist
+              </h2>
+              <div className="w-16 h-[2px] bg-garnet mt-4"></div>
+            </div>
+          </Gsap.div>
+          
+          {/* Left Side: Explore Projects (Synced with Right Stack) */}
+          <Gsap.div
+            initial={false}
+            animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="absolute bottom-32 left-12 md:left-24 lg:left-32 z-30 hidden sm:flex"
+          >
+            <button
+              onClick={() => document.getElementById('project-section')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group flex items-center gap-4 bg-charcoal text-ivory px-8 py-4 border-2 border-charcoal font-mono text-sm font-bold uppercase tracking-widest hover:bg-garnet hover:border-garnet transition-all duration-500 rounded-sm shadow-xl"
+            >
+              Explore <ArrowUpRight size={18} />
+            </button>
+          </Gsap.div>
 
-          {/* Right Decoration */}
-          <OrbitingDecoration icon={Database} delay={0.28} className="right-0 sm:right-2 lg:right-16 top-10" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
-          <OrbitingDecoration icon={Cpu} delay={0.58} className="right-6 sm:right-12 lg:right-28 -bottom-2 hidden sm:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
         </div>
 
-        {/* 3. Clean Slogan with Green Accent */}
-        <Gsap.div
-          initial={false}
-          animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.38, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center gap-2 mt-0"
-        >
-          <h2 className="text-[clamp(1.2rem,4.2vw,2rem)] font-jakarta font-bold text-charcoal/80 tracking-tight flex items-center justify-center flex-wrap gap-2 px-2">
-            UI/UX Designer <span className="bg-garnet/10 px-2 rounded-md ring-1 ring-garnet/20">& Data</span> Specialist<span className="text-garnet font-extrabold -ml-1">.</span>
-          </h2>
-          <p className="font-jakarta text-base text-charcoal/60 max-w-xl leading-7 mt-2 px-4">
-            Creating seamless digital experiences through design and data strategy.
-          </p>
-        </Gsap.div>
+      </div>
 
-        {/* 4. CTA Buttons */}
-        <Gsap.div
-          initial={false}
-          animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-          transition={{ delay: 0.5, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-wrap items-center justify-center gap-4 mt-5"
-        >
-          <button
-            onClick={() => document.getElementById('project-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group flex items-center gap-2 bg-charcoal text-ivory px-6 py-3 font-mono text-sm font-bold uppercase tracking-wider hover:bg-garnet hover:text-ivory transition-all duration-300 cursor-pointer"
-          >
-            View Projects <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </button>
-          <a
-            href="/cv.pdf"
-            download
-            className="group flex items-center gap-2 bg-transparent text-charcoal border-2 border-charcoal px-6 py-3 font-mono text-sm font-bold uppercase tracking-wider hover:bg-charcoal hover:text-ivory transition-all duration-300"
-          >
-            Download CV <Download size={16} className="group-hover:translate-y-0.5 transition-transform" />
-          </a>
-        </Gsap.div>
-
-
-
-        </Gsap.div>
-
-      </Gsap.div>
+      {/* ── Fixed Corner Info ── */}
+      <div className="absolute top-10 right-10 flex flex-col items-end opacity-20 hidden lg:flex z-40">
+        <span className="font-mono text-[10px] uppercase tracking-[0.5em]">Garis Rayya © 2026</span>
+      </div>
     </header>
   );
 });

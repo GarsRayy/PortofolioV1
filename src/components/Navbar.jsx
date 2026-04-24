@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { label: 'Experience', sectionId: 'experience-section' },
   { label: 'Work', sectionId: 'project-section' },
   { label: 'Creative', sectionId: 'playground' },
-  { label: 'Leadership', sectionId: 'leadership-section' },
+  { label: "Let's Connect", sectionId: 'contact-section' },
 ];
 
 const DARK_SECTION_IDS = ['project-section'];
