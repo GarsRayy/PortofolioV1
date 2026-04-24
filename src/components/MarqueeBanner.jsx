@@ -1,13 +1,14 @@
 import { memo } from 'react';
 
-const skills = [
-  'Machine Learning',
-  'Deep Learning',
-  'Computer Vision',
-  'Natural Language Processing (NLP)',
-  'Machine Learning Operations (MLOps)',
-  'Data Analysis',
-  'Web Development',
+const officialRoles = [
+  'Asisten Praktikum Basis Data',
+  'Asisten Praktikum PBO Java',
+  'Asisten Praktikum Struktur Data C++',
+  'Asisten Praktikum DTD & PKS',
+  'Head of UI/UX Subdivision PPLK',
+  'Website Team HUMAS IF',
+  'Head of Design Lempers',
+  'Publication Staff HMIF',
 ];
 
 const MarqueeBanner = memo(function MarqueeBanner() {
@@ -23,7 +24,7 @@ const MarqueeBanner = memo(function MarqueeBanner() {
           >
             {[...Array(3)].map((_, i) => (
               <div key={i} className="flex gap-6 md:gap-14 text-lg sm:text-2xl md:text-4xl font-black uppercase items-center">
-                {skills.map((skill, j) => (
+                {officialRoles.map((skill, j) => (
                   <span key={j} className="flex items-center gap-6 md:gap-14">
                     <span
                       className="text-garnet hover:text-ivory transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(140,16,7,0.6)]"
@@ -50,7 +51,7 @@ const MarqueeBanner = memo(function MarqueeBanner() {
           >
             {[...Array(3)].map((_, i) => (
               <div key={i} className="flex gap-6 md:gap-12 text-base sm:text-lg md:text-2xl font-black uppercase items-center">
-                {skills.map((skill, j) => (
+                {officialRoles.map((skill, j) => (
                   <span key={j} className="flex items-center gap-6 md:gap-12">
                     <span className="text-black hover:text-white transition-colors duration-300">{skill}</span>
                     <span className="text-black/25 text-xs">◆</span>

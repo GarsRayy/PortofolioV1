@@ -14,7 +14,6 @@ const ProjectGallery = lazy(() => import('../components/ProjectGallery'));
 const ProfessionalExperience = lazy(() => import('../components/ProfessionalExperience'));
 const VisualPlayground = lazy(() => import('../components/VisualPlayground'));
 const LeadershipSection = lazy(() => import('../components/LeadershipSection'));
-const RecognitionSection = lazy(() => import('../components/RecognitionSection'));
 const NoiseOverlay = lazy(() => import('../components/NoiseOverlay'));
 
 export default function Home() {
@@ -95,10 +94,8 @@ export default function Home() {
 
   const handleOpenProject = useCallback((project) => {
     if (!project?.slug) return;
-    navigate(`/projects/${project.slug}`, {
-      state: { backgroundLocation: location },
-    });
-  }, [navigate, location]);
+    navigate(`/project/${project.slug}`);
+  }, [navigate]);
 
   return (
     <div ref={containerRef} className="bg-ivory text-charcoal selection:bg-garnet selection:text-ivory relative font-jakarta">
@@ -134,7 +131,6 @@ export default function Home() {
 
         <Suspense fallback={null}><VisualPlayground /></Suspense>
         <Suspense fallback={null}><LeadershipSection /></Suspense>
-        <Suspense fallback={null}><RecognitionSection /></Suspense>
         
         <Suspense fallback={null}><Footer /></Suspense>
       </div>

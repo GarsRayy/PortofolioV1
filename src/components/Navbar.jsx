@@ -1,15 +1,15 @@
 import { useState, memo, useEffect, useRef } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Gsap, GsapPresence } from '../utils/gsapAnimate';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import Magnetic from './Magnetic';
 import { exponentialEaseOut } from '../utils/easing';
 
 const NAV_ITEMS = [
-  { label: 'About', sectionId: 'about-section' },
-  { label: 'Experience', sectionId: 'experience-section' },
-  { label: 'Work', sectionId: 'project-section' },
-  { label: 'Creative', sectionId: 'playground' },
-  { label: 'Leadership', sectionId: 'leadership-section' },
+  { label: 'About', sectionId: 'about-section', path: '/' },
+  { label: 'Work', sectionId: 'project-section', path: '/projects' },
+  { label: 'Archives', sectionId: 'playground', path: '/archives' },
+  { label: 'Leadership', sectionId: 'leadership-section', path: '/' },
 ];
 
 const DARK_SECTION_IDS = ['project-section'];
@@ -19,6 +19,8 @@ const Navbar = memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOnDarkSection, setIsOnDarkSection] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
   const previousBodyOverflowRef = useRef('');
   const menuStoppedLenisRef = useRef(false);
 
@@ -82,11 +84,21 @@ const Navbar = memo(function Navbar() {
     document.body.style.overflow = previousBodyOverflowRef.current;
   }, []);
 
-  const scrollTo = (sectionId) => {
+  const handleNavClick = (item) => {
     setIsMenuOpen(false);
+    
+    if (item.path !== '/' && location.pathname !== item.path) {
+      navigate(item.path);
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/' + (item.sectionId ? `?scrollTo=${item.sectionId}` : ''));
+      return;
+    }
 
     setTimeout(() => {
-      const target = document.getElementById(sectionId);
+      const target = document.getElementById(item.sectionId);
       if (!target) return;
 
       if (window.lenisInstance && typeof window.lenisInstance.scrollTo === 'function') {
@@ -99,7 +111,7 @@ const Navbar = memo(function Navbar() {
       }
 
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100); // Small delay to let close animation start and avoid layout calculation stutter
+    }, 100);
   };
 
   return (
@@ -171,7 +183,7 @@ const Navbar = memo(function Navbar() {
                 {NAV_ITEMS.map((item, i) => (
                   <Gsap.button
                     key={item.sectionId}
-                    onClick={() => scrollTo(item.sectionId)}
+                    onClick={() => handleNavClick(item)}
                     initial={{ opacity: 0, x: -14 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.28, delay: 0.05 + i * 0.04, ease: [0.16, 1, 0.3, 1] }}
@@ -192,7 +204,7 @@ const Navbar = memo(function Navbar() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.28 }}
-                onClick={() => scrollTo('contact-section')}
+                onClick={() => handleNavClick({ sectionId: 'contact-section', path: '/' })}
                 className={`w-full max-w-md mx-auto mt-6 h-12 rounded-full text-xs font-bold uppercase tracking-[0.16em] flex items-center justify-center gap-2 shadow-[0_10px_24px_rgba(0,0,0,0.16)] ${isOnDarkSection ? 'bg-ivory text-charcoal' : 'bg-charcoal text-ivory'}`}
               >
                 Let's Talk
@@ -216,7 +228,7 @@ const Navbar = memo(function Navbar() {
               <button
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => scrollTo(item.sectionId)}
+                onClick={() => handleNavClick(item)}
                 className={`relative px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.12em] md:tracking-[0.16em] transition-colors ${isOnDarkSection ? 'text-white/60 hover:text-white' : 'text-black/60 hover:text-black'}`}
               >
                 <span className="relative z-10">{item.label}</span>
@@ -237,7 +249,7 @@ const Navbar = memo(function Navbar() {
       <div className="hidden lg:flex pointer-events-auto">
         <Magnetic>
           <button
-            onClick={() => scrollTo('contact-section')}
+            onClick={() => handleNavClick({ sectionId: 'contact-section', path: '/' })}
             className={`group relative overflow-hidden flex items-center gap-3 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.12em] md:tracking-[0.16em] hover:shadow-[0_0_30px_rgba(140,16,7,0.3)] transition-all duration-500 ${isOnDarkSection ? 'bg-ivory text-charcoal' : 'bg-charcoal text-ivory'}`}
           >
             {/* Core Label */}

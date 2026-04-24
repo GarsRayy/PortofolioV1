@@ -2,6 +2,8 @@ export const PROJECT_DETAILS_DATA = {
   "pplk-itera-website": {
     title: "PPLK ITERA Website",
     category: "Web Development / UI/UX",
+    mainCategory: "UI/UX & Web",
+    slug: "pplk-itera-website",
     tagline: "Official orientation platform for 5,000+ new students at ITERA.",
     year: "2025",
     stack: ["React", "Tailwind CSS", "GSAP", "Figma"],
@@ -11,10 +13,13 @@ export const PROJECT_DETAILS_DATA = {
     links: {
       repo: "https://github.com/GarsRayy",
     },
+    image: "/images/pplk_itera_website_1776967239729.png"
   },
   "income-prediction-ann": {
     title: "Income Prediction (ANN)",
     category: "Data Science / ANN",
+    mainCategory: "Data & ML",
+    slug: "income-prediction-ann",
     tagline: "Artificial Neural Network model to predict income brackets based on demographic data.",
     year: "2024",
     stack: ["Python", "TensorFlow", "Pandas", "Scikit-Learn"],
@@ -24,10 +29,13 @@ export const PROJECT_DETAILS_DATA = {
     links: {
       repo: "https://github.com/GarsRayy",
     },
+    image: "/images/income_prediction_ann_1776967206440.png"
   },
   "spatial-mapping-kkn": {
     title: "Spatial Mapping KKN",
     category: "Data Engineering / GIS",
+    mainCategory: "Engineering",
+    slug: "spatial-mapping-kkn",
     tagline: "Comprehensive geographic information system for rural asset management.",
     year: "2024",
     stack: ["ArcGIS", "QGIS", "Data Engineering", "Spatial Analysis"],
@@ -37,10 +45,13 @@ export const PROJECT_DETAILS_DATA = {
     links: {
       repo: "https://github.com/GarsRayy",
     },
+    image: "/images/spatial_mapping_kkn_1776967255935.png"
   },
   "study-quest": {
     title: "Study Quest",
     category: "EdTech / Gamification",
+    mainCategory: "UI/UX & Web",
+    slug: "study-quest",
     tagline: "Gamified learning platform to increase student engagement and retention.",
     year: "2024",
     stack: ["Flutter", "Firebase", "Game Design"],
@@ -50,10 +61,13 @@ export const PROJECT_DETAILS_DATA = {
     links: {
       repo: "https://github.com/GarsRayy",
     },
+    image: "/images/study_quest_app_1776968168422.png"
   },
   "website-hmif-itera-2026": {
     title: "Website HMIF ITERA 2026",
     category: "Web Development & UI/UX",
+    mainCategory: "UI/UX & Web",
+    slug: "website-hmif-itera-2026",
     tagline: "Official digital hub for Informatics students at ITERA.",
     year: "2026",
     stack: ["Next.js", "Tailwind CSS", "Figma", "Arsitektur Informasi"],
@@ -63,5 +77,6 @@ export const PROJECT_DETAILS_DATA = {
     links: {
       repo: "https://github.com/GarsRayy",
     },
+    image: "/images/hmif_website_placeholder.png"
   },
 };

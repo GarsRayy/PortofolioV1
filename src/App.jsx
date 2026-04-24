@@ -1,6 +1,10 @@
 import { useLayoutEffect } from "react";
 import { Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import Home from "./pages/Home";
+import AllProjects from "./pages/AllProjects";
+import ProjectDetail from "./pages/ProjectDetail";
+import CreativeArchives from "./pages/CreativeArchives";
+import StealthAdmin from "./pages/StealthAdmin";
 import ProjectDetailModal from "./components/projects/ProjectDetailModal";
 
 // Component untuk scroll ke atas setiap kali route berubah
@@ -106,6 +110,11 @@ export default function App() {
       <ScrollToTop />
       <Routes location={backgroundLocation || location}>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<AllProjects />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/projects/:slug" element={<ProjectDetail />} />
+        <Route path="/archives" element={<CreativeArchives />} />
+        <Route path="/secret-garis-admin" element={<StealthAdmin />} />
       </Routes>
 
       {backgroundLocation && (
