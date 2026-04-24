@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gsap } from '../utils/gsapAnimate';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { supabase } from '../utils/supabaseClient';
@@ -56,21 +55,21 @@ const CreativeArchives = () => {
       <main className="max-w-7xl mx-auto px-6 pt-32 pb-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
           <div>
-            <Gsap.div
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center gap-4 mb-6"
             >
               <span className="w-3 h-3 bg-garnet rounded-full" />
               <span className="font-mono text-sm font-bold uppercase tracking-widest text-garnet">Creative Archives</span>
-            </Gsap.div>
-            <Gsap.h1 
+            </motion.div>
+            <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-6xl md:text-8xl font-clash font-black uppercase tracking-tighter text-charcoal leading-none"
             >
               Visual <br /> Fragments.
-            </Gsap.h1>
+            </motion.h1>
           </div>
 
           {/* Sticky Tabs */}

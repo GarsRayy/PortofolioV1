@@ -157,17 +157,11 @@ const ProfessionalExperience = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const statCards = useMemo(() => {
-    const roles = experiences.length;
-    const activeNow = experiences.filter((item) => /present/i.test(item.period)).length;
-    const organizations = new Set(experiences.map((item) => item.company)).size;
-    const startYears = experiences.map((item) => getStartYear(item.period)).filter(Boolean);
-    const firstYear = startYears.length ? Math.min(...startYears) : new Date().getFullYear();
-
     return [
-      { label: 'Total Roles', value: String(roles).padStart(2, '0') },
-      { label: 'Active Now', value: String(activeNow).padStart(2, '0') },
-      { label: 'Since', value: String(firstYear) },
-      { label: 'Organizations', value: String(organizations).padStart(2, '0') },
+      { label: 'Total Roles', value: '07+' },
+      { label: 'Active Now', value: '03' },
+      { label: 'Since', value: '2023' },
+      { label: 'Organizations', value: '04' },
     ];
   }, []);
 
@@ -195,7 +189,7 @@ const ProfessionalExperience = () => {
             </h2>
 
             <p className="mt-5 text-[14px] md:text-[15px] font-light leading-[1.8] text-black/60 max-w-[320px]">
-              Selected roles across AI cohorts, data analytics, and mentoring. Each step adds stronger delivery habits, leadership, and product clarity.
+              Selected roles across UI/UX Design, Data Analytics, and Academic Mentorship. Each step builds stronger technical delivery, organizational leadership, and analytical clarity.
             </p>
 
             <div className="mt-7 grid grid-cols-2 gap-2.5">

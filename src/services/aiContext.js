@@ -17,8 +17,9 @@ const PROJECT_DETAILS = PROJECT_DETAILS_DATA;
  * @returns {string}
  */
 function serializeExperience() {
+  if (!PORTFOLIO_DATA?.experience) return 'No experience listed.';
   return PORTFOLIO_DATA.experience
-    .map(exp => `- ${exp.title} (${exp.period}): ${exp.description.join(' ')}`)
+    .map(exp => `- ${exp?.title} (${exp?.period}): ${(exp?.description || []).join(' ')}`)
     .join('\n');
 }
 
@@ -27,10 +28,12 @@ function serializeExperience() {
  * @returns {string}
  */
 function serializeTechStack() {
+  if (!PORTFOLIO_DATA?.techStack) return 'No tech stack listed.';
   const grouped = {};
   for (const tech of PORTFOLIO_DATA.techStack) {
+    if (!tech?.category) continue;
     if (!grouped[tech.category]) grouped[tech.category] = [];
-    grouped[tech.category].push(tech.name);
+    grouped[tech.category].push(tech.name || 'Unknown');
   }
   return Object.entries(grouped)
     .map(([category, techs]) => `- ${category}: ${techs.join(', ')}`)
@@ -42,17 +45,19 @@ function serializeTechStack() {
  * @returns {string}
  */
 function serializeProjects() {
+  if (!PROJECT_DETAILS) return 'No projects listed.';
   return Object.entries(PROJECT_DETAILS)
     .map(([slug, p]) => [
-      `Project: ${p.title} (slug: ${slug})`,
-      `Category: ${p.category}`,
-      `Tagline: ${p.tagline}`,
-      `Year: ${p.year || 'N/A'}`,
-      `Stack: ${p.stack.join(', ')}`,
-      `Features: ${p.features.join('; ')}`,
-      `Impact: ${p.impact.join('; ')}`,
-      `Links: Live (${p.links.live || 'N/A'}), Repo (${p.links.repo || 'N/A'})`,
-      p.notes ? `Notes: ${p.notes}` : '',
+      `Project: ${p?.title} (slug: ${slug})`,
+      `Category: ${p?.category}`,
+      `Tagline: ${p?.tagline}`,
+      `Year: ${p?.year || 'N/A'}`,
+      `Role: ${p?.role || 'N/A'}`,
+      `Tech Stack: ${(p?.techStack || []).join(', ')}`,
+      `Challenge: ${p?.challenge || 'N/A'}`,
+      `Solution: ${p?.solution || 'N/A'}`,
+      `Outcome: ${p?.outcome || 'N/A'}`,
+      `Links: Repo (${p?.links?.repo || 'N/A'})`,
     ].filter(Boolean).join('\n'))
     .join('\n---\n');
 }
@@ -78,7 +83,7 @@ function scoreProjectRelevance(query, slug, detail) {
   let score = 0;
   const title = detail?.title?.toLowerCase() || '';
   const category = detail?.category?.toLowerCase() || '';
-  const tags = (detail?.stack || []).map(item => item.toLowerCase());
+  const tags = (detail?.techStack || []).map(item => item.toLowerCase());
 
   if (q.includes(slug.toLowerCase())) score += 5;
   if (title && q.includes(title)) score += 4;
@@ -109,8 +114,8 @@ export function buildScopedContext(userMessage) {
       .map(({ slug, detail }) => [
         `- ${detail.title} (slug: ${slug})`,
         `  Category: ${detail.category}`,
-        `  Key stack: ${(detail.stack || []).slice(0, 6).join(', ')}`,
-        `  Top features: ${(detail.features || []).slice(0, 3).join('; ')}`,
+        `  Tech Stack: ${(detail.techStack || []).slice(0, 6).join(', ')}`,
+        `  Overview: ${detail.tagline}`,
       ].join('\n'))
       .join('\n')
     : '- No highly matched project; prioritize concise profile-level answers.';
@@ -179,7 +184,13 @@ ${serializeCapabilities()}
 ### YOUR WEBSITE SECTIONS
 The portfolio website has these sections that visitors can navigate to:
 ${getSectionLabels()}
-Navigation is handled automatically - you just need to answer the question. NEVER mention sections, scrolling, or navigation in your responses.
+
+## DYNAMIC NAVIGATION (IMPORTANT)
+If a user asks to see your works, case studies, or full project list, you MUST include the tag [NAVIGATE:/projects] at the end of your response.
+If a user asks to see your creative work, photography, hobby, or visual archives, you MUST include the tag [NAVIGATE:/archives] at the end of your response.
+If a user asks about a specific project by name, you can also use [NAVIGATE:/project/slug-name].
+
+Navigation is handled automatically. Just answer the question directly and append the tag if relevant.
 
 ## RESPONSE RULES
 
@@ -197,7 +208,7 @@ Navigation is handled automatically - you just need to answer the question. NEVE
  - If the user asks for a list, show **max 5 items**, then offer to continue.
  - Avoid long intros, disclaimers, or repeating the question.
 
-5. **Never narrate UI actions**: NEVER say things like "Saya scrollkan ke...", "Let me navigate to...", "I'll take you to...". Navigation is handled automatically and silently. Just answer the question directly.
+5. **Navigation Tags**: Use the [NAVIGATE:/path] tags ONLY at the very end of your message if the user's intent matches. Do NOT narrate the action (e.g., don't say "Let me show you..."). Just provide the answer and the tag.
 
 6. **Tone**: Friendly, confident, and personal - like you're actually talking to someone who visited your portfolio. Be warm but professional. You're proud of your work but not arrogant.
 

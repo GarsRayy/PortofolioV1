@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { label: 'About', sectionId: 'about-section', path: '/' },
   { label: 'Work', sectionId: 'project-section', path: '/projects' },
   { label: 'Archives', sectionId: 'playground', path: '/archives' },
+  { label: 'Insights', sectionId: 'insights', path: '/insights' },
   { label: 'Leadership', sectionId: 'leadership-section', path: '/' },
 ];
 

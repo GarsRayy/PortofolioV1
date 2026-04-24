@@ -406,10 +406,22 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
             setIsStreaming(true);
             setMessages(prev => [...prev, { type: 'bot', text: "" }]);
 
-            const safeText = sanitizeAssistantResponse(fullText.trim())
+            let safeText = sanitizeAssistantResponse(fullText.trim())
                 || (lang === 'en'
                     ? 'I can help with my portfolio projects, skills, and experience. Ask me anything there.'
                     : 'Aku bisa bantu jawab soal portofolio, project, skill, dan pengalaman aku.');
+
+            // AI Navigation Parser: [NAVIGATE:/path]
+            const navMatch = safeText.match(/\[NAVIGATE:(.+?)\]/);
+            if (navMatch) {
+                const navPath = navMatch[1];
+                safeText = safeText.replace(/\[NAVIGATE:.+?\]/, '').trim();
+                
+                // Trigger navigation after typewriting finishes (or slightly before)
+                setTimeout(() => {
+                    navigate(navPath);
+                }, 500); 
+            }
 
             await typewriteMessage(safeText, setMessages, forceScrollToBottom);
 
@@ -421,11 +433,13 @@ const ChatWidget = ({ isOpen: controlledIsOpen, onOpenChange }) => {
             }
 
         } catch (error) {
+            console.error("Chat Error:", error);
             setIsTyping(false);
             setIsStreaming(false);
 
             const icon = ERROR_ICONS[error?.type] || '⚠️';
-            const errMsg = error?.message || "Something went wrong. Please try again.";
+            // Show the actual error message if available, otherwise fallback
+            const errMsg = error?.message || (typeof error === 'string' ? error : "An unexpected error occurred.");
 
             setMessages(prev => [...prev, {
                 type: 'bot',

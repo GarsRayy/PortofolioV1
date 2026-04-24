@@ -55,26 +55,28 @@ const ON_TOPIC_OVERRIDES = [
   /garis|rayya/i,
   /portofolio|portfolio/i,
   /project|projek|proyek/i,
-  ...PROJECT_META.flatMap(p => [
-    new RegExp(escapeRegex(p.slug), 'i'),
-    new RegExp(escapeRegex(p.title), 'i'),
-  ]),
+  ...(PROJECT_META || []).flatMap(p => {
+    const patterns = [];
+    if (p?.slug) patterns.push(new RegExp(escapeRegex(p.slug), 'i'));
+    if (p?.title) patterns.push(new RegExp(escapeRegex(p.title), 'i'));
+    return patterns;
+  }),
 ];
 
 // ─── Project Matching ────────────────────────────────────────────
 // Build search-friendly aliases from PROJECT_META so users can refer
 // to projects by partial name, slug, or word fragments.
 
-const PROJECT_ALIASES = PROJECT_META.map(p => ({
-  slug: p.slug,
-  title: p.title,
-  id: p.id,
-  category: p.category,
+const PROJECT_ALIASES = (PROJECT_META || []).map(p => ({
+  slug: p?.slug || 'unknown',
+  title: p?.title || 'Untitled',
+  id: p?.id,
+  category: p?.category || 'General',
   searchTerms: [
-    p.slug.toLowerCase(),
-    p.title.toLowerCase(),
-    ...p.title.toLowerCase().split(/[\s-]+/).filter(w => w.length > 2),
-  ],
+    (p?.slug || '').toLowerCase(),
+    (p?.title || '').toLowerCase(),
+    ...(p?.title || '').toLowerCase().split(/[\s-]+/).filter(w => w.length > 2),
+  ].filter(Boolean),
 }));
 
 const PROJECT_REFERENCE_TRIGGERS = [

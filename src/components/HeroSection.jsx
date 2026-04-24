@@ -108,7 +108,7 @@ const HeroSection = memo(function HeroSection({ isRevealed = true }) {
           initial={false}
           animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="pt-32 z-30"
+          className="pt-24 md:pt-32 z-30"
         >
           <LocationTimeBadge />
         </Gsap.div>
@@ -116,35 +116,35 @@ const HeroSection = memo(function HeroSection({ isRevealed = true }) {
         {/* ── Layered Portrait Composition ── */}
         <div className="relative flex-1 w-full flex items-end justify-center">
           
-          {/* Layer 1: Background Typography (Moved Up & Scaled Down) */}
+          {/* Layer 1: Background Typography (Adjusted for mobile) */}
           <Gsap.div
             style={{ y: textY }}
-            className="absolute inset-0 flex flex-col items-center justify-start pointer-events-none z-0 select-none pt-42"
+            className="absolute inset-0 flex flex-col items-center justify-start pointer-events-none z-0 select-none pt-28 sm:pt-32 md:pt-42"
           >
             <Gsap.h1
               initial={false}
               animate={isRevealed ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 1.1, y: 50 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="font-clash font-black uppercase tracking-tighter text-[clamp(5rem,18vw,14rem)] leading-[0.75] text-center italic"
+              className="font-clash font-black uppercase tracking-tighter text-[clamp(4rem,16vw,14rem)] md:text-[clamp(5rem,18vw,14rem)] leading-[0.75] text-center italic"
             >
-              <span className="text-charcoal">GARIS</span><br />
-              <span className="text-garnet ml-[0.05em]">RAYYA</span>
+              <span className="text-charcoal/80">GARIS</span><br />
+              <span className="text-garnet ml-[0.05em] opacity-90">RAYYA</span>
             </Gsap.h1>
           </Gsap.div>
 
-          {/* Floating Icons (Restored) */}
-          <OrbitingDecoration icon={Code2} delay={0.6} className="top-1/4 left-[15%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
-          <OrbitingDecoration icon={Database} delay={0.8} className="top-1/3 right-[18%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
-          <OrbitingDecoration icon={Terminal} delay={1.0} className="bottom-1/3 left-[20%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
-          <OrbitingDecoration icon={Cpu} delay={1.2} className="bottom-1/4 right-[25%] hidden lg:flex" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          {/* Floating Icons (Responsive) */}
+          <OrbitingDecoration icon={Code2} delay={0.6} className="top-[22%] left-[10%] lg:left-[15%] scale-75 lg:scale-100" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          <OrbitingDecoration icon={Database} delay={0.8} className="top-[30%] right-[8%] lg:right-[18%] scale-75 lg:scale-100" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          <OrbitingDecoration icon={Terminal} delay={1.0} className="bottom-[40%] left-[8%] lg:left-[20%] scale-75 lg:scale-100" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
+          <OrbitingDecoration icon={Cpu} delay={1.2} className="bottom-[45%] right-[10%] lg:right-[25%] scale-75 lg:scale-100" isRevealed={isRevealed} enableAmbientMotion={enableAmbientMotion} />
 
-          {/* Layer 2: Foreground Portrait (Scaled Up) */}
+          {/* Layer 2: Foreground Portrait (Adjusted Bottom to avoid overlap) */}
           <Gsap.div
             initial={false}
             animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 150 }}
             style={{ scale: imgScale }}
             transition={{ duration: 1.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-auto h-[90vh] flex items-end justify-center"
+            className="relative z-10 w-auto h-[50vh] sm:h-[65vh] md:h-[90vh] flex items-end justify-center mb-40 sm:mb-48 md:mb-0"
           >
             <img
               src="/profile-hero.png"
@@ -153,44 +153,62 @@ const HeroSection = memo(function HeroSection({ isRevealed = true }) {
             />
           </Gsap.div>
 
-          {/* Metadata & Actions Group (Bottom) */}
-          
-          {/* Right Side Stack: Download CV + Roles */}
-          <Gsap.div
-            initial={false}
-            animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="absolute bottom-32 right-8 md:right-16 z-30 flex flex-col items-end text-right hidden sm:flex gap-6"
-          >
-            <a
-              href="/cv.pdf"
-              download
-              className="group flex items-center gap-4 border-2 border-charcoal text-charcoal px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-charcoal hover:text-ivory transition-all duration-500 rounded-sm bg-ivory/50 backdrop-blur-sm"
+          {/* Metadata & Actions Group (Optimized Bottom-Fixed Style for Mobile) */}
+          <div className="absolute inset-x-0 bottom-0 md:bottom-24 px-6 pb-8 md:pb-0 md:px-12 z-40 flex flex-col md:flex-row items-center md:items-end justify-between gap-4 md:gap-8 pointer-events-none">
+            
+            {/* Background blur for mobile readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/80 to-transparent md:hidden pointer-events-none -z-10 h-[150%]" />
+
+            {/* Left Side: Explore Button */}
+            <Gsap.div
+              initial={false}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 1, delay: 1.2 }}
+              className="pointer-events-auto w-full md:w-auto order-2 md:order-1"
             >
-              Download CV <Download size={18} />
-            </a>
-            <div className="flex flex-col items-end">
-              <h2 className="text-xl md:text-2xl font-clash font-bold text-charcoal uppercase italic tracking-tight">
+              <button
+                onClick={() => document.getElementById('project-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full md:w-auto group flex items-center justify-center gap-3 bg-charcoal text-ivory px-8 py-4 border-2 border-charcoal font-mono text-xs font-bold uppercase tracking-widest hover:bg-garnet hover:border-garnet transition-all duration-500 rounded-sm shadow-2xl"
+              >
+                Explore <ArrowUpRight size={16} />
+              </button>
+            </Gsap.div>
+
+            {/* Middle Side: Role (Mobile Positioned Clearly Below Portrait) */}
+            <Gsap.div
+              initial={false}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 1, delay: 1.3 }}
+              className="flex md:hidden flex-col items-center text-center py-2 order-1"
+            >
+              <h2 className="text-sm font-clash font-bold text-charcoal uppercase italic tracking-tight leading-tight">
                 UI/UX Designer<br />& Data Specialist
               </h2>
-              <div className="w-16 h-[2px] bg-garnet mt-4"></div>
-            </div>
-          </Gsap.div>
-          
-          {/* Left Side: Explore Projects (Synced with Right Stack) */}
-          <Gsap.div
-            initial={false}
-            animate={isRevealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="absolute bottom-32 left-12 md:left-24 lg:left-32 z-30 hidden sm:flex"
-          >
-            <button
-              onClick={() => document.getElementById('project-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group flex items-center gap-4 bg-charcoal text-ivory px-8 py-4 border-2 border-charcoal font-mono text-sm font-bold uppercase tracking-widest hover:bg-garnet hover:border-garnet transition-all duration-500 rounded-sm shadow-xl"
+              <div className="w-10 h-[1.5px] bg-garnet mt-2"></div>
+            </Gsap.div>
+
+            {/* Right Side Stack: CV + Roles (Desktop) */}
+            <Gsap.div
+              initial={false}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 1, delay: 1.2 }}
+              className="flex flex-col items-center md:items-end text-center md:text-right gap-4 md:gap-6 pointer-events-auto w-full md:w-auto order-3"
             >
-              Explore <ArrowUpRight size={18} />
-            </button>
-          </Gsap.div>
+              <a
+                href="/cv.pdf"
+                download
+                className="w-full md:w-auto group flex items-center justify-center gap-3 border-2 border-charcoal text-charcoal px-8 py-4 font-mono text-xs font-bold uppercase tracking-widest hover:bg-charcoal hover:text-ivory transition-all duration-500 rounded-sm bg-white/90 backdrop-blur-md"
+              >
+                Download CV <Download size={16} />
+              </a>
+              <div className="hidden md:flex flex-col items-end">
+                <h2 className="text-xl md:text-2xl font-clash font-bold text-charcoal uppercase italic tracking-tight leading-tight">
+                  UI/UX Designer<br />& Data Specialist
+                </h2>
+                <div className="w-16 h-[2px] bg-garnet mt-4"></div>
+              </div>
+            </Gsap.div>
+          </div>
 
         </div>
 

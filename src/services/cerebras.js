@@ -110,7 +110,7 @@ export async function* streamCerebras(messages) {
             },
             body: JSON.stringify({
                 messages: conversation,
-                model: "gpt-oss-120b",
+                model: "llama3.1-8b",
                 max_tokens: 1024,
                 temperature: 0.35,
                 stream: true,
